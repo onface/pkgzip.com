@@ -11,7 +11,8 @@
     "test": "mocha --compilers js:babel-register",
     "dist": "babel src --out-dir dist",
     "start": "node dist/index.js",
-    "micros/publish": "npm version patch && npm run dist && npm publish"
+    "micros/publish": "npm version patch && npm run dist && npm publish",
+    "micros/deploy": "micros service:deploy frogmarch -f frogmarch.sd.yml -e adev"
   },
   "keywords": [
     "npm",
