@@ -1,7 +1,7 @@
 {
-  "name": "frogmarch",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@atlassian/frogmarch",
+  "version": "0.0.1",
+  "description": "Serves a single script with your npm modules webpacked.",
   "main": "dist/index.js",
   "scripts": {
     "dev": "babel-node -- src/index.js",
@@ -10,13 +10,23 @@
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-register",
     "dist": "babel src --out-dir dist",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "publish": "npm run dist && npm publish"
   },
   "keywords": [
     "npm",
     "dependency",
     "webpack"
   ],
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "public"
+  ],
+  "publishConfig": {
+    "registry": "https://npm-private.atlassian.io"
+  },
   "author": "Atlassian",
   "license": "ISC",
   "dependencies": {

@@ -1,0 +1,14 @@
+name: Frogmarch
+description: Frogmarch
+links:
+  binary:
+    type: npm
+    artifactId: '@atlassian/frogmarch'
+    version: 0.0.1
+  healthcheck:
+    uri: /healthcheck
+  source:
+    url: 'https://bitbucket.org/atlassian/frogmarch'
+notifications:
+  email: bgummer@atlassian.com
+organization: Design Platform

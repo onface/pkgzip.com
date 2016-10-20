@@ -5,6 +5,10 @@ const app = express();
 
 app.use(express.static('public'));
 
+app.get('/healthcheck', (req, res) => {
+  res.send('OK');
+});
+
 app.get('/bundle.js', (req, res) => {
   if (!('packages' in req.query && req.query.packages.length)) {
     return res.send(500, 'Please supply a "packages" GET parameter.');
