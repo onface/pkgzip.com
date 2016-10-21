@@ -11,7 +11,8 @@ app.get('/healthcheck', (req, res) => {
 
 app.get('/bundle.js', (req, res) => {
   if (!('packages' in req.query && req.query.packages.length)) {
-    return res.send(500, 'Please supply a "packages" GET parameter.');
+    res.send(500, 'Please supply a "packages" GET parameter.');
+    return;
   }
 
   const pkgsParam = req.query.packages;
@@ -33,5 +34,5 @@ app.get('/bundle.js', (req, res) => {
 
 const port = 8080;
 app.listen(port, () => {
-  console.log(`Example app listening on port http://0.0.0.0:${port}!`);
+  console.log(`Example app listening at http://0.0.0.0:${port} :)`); // eslint-disable-line no-console
 });

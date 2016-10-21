@@ -1,5 +1,6 @@
 name: Frogmarch
 description: Frogmarch
+
 links:
   binary:
     type: docker
@@ -9,9 +10,15 @@ links:
     uri: /healthcheck
   source:
     url: 'https://bitbucket.org/atlassian/frogmarch'
+
+resources:
+  - type: s3
+    name: cache
+
 loadBalancer:
   connectionTimeout: 300
-  connectionDrainingTimeout: 300
+  # connectionDrainingTimeout: 300
+
 notifications:
   email: bgummer@atlassian.com
 organization: Design Platform
