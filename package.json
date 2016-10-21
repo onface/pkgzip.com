@@ -1,6 +1,6 @@
 {
   "name": "@atlassian/frogmarch",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Frogmarches your npm packages via webpack into a single JS file",
   "main": "dist/index.js",
   "scripts": {
