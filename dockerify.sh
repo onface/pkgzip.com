@@ -1,12 +1,22 @@
 set -e
 
+# bump npm version
 npm version patch
-
-IMG_NAME="docker.atlassian.io/bgummer/frogmarch"
 NEW_VERSION=`node -e "console.log(require('./package.json').version);"`
-echo "New version is $NEW_VERSION"
 
+# work out new docker tag name
+IMG_NAME="docker.atlassian.io/bgummer/frogmarch"
+echo "New version is $NEW_VERSION"
 NEW_IMAGE="$IMG_NAME:v$NEW_VERSION"
 
+# build new docker img and push
 docker build -t "$NEW_IMAGE" .
 docker push "$NEW_IMAGE"
+
+# write new version to micros service descriptor
+sed -i .bak "s/tag: .*/tag: v${IMG_NAME}/" frogmarch.sd.yml
+rm -f frogmarch.sd.yml.bak
+
+# publish to micros in fast mode
+sleep 10
+micros service:update frogmarch -f frogmarch.sd.yml -e adev

@@ -11,8 +11,7 @@
     "test": "mocha --compilers js:babel-register",
     "dist": "babel src --out-dir dist",
     "start": "node dist/index.js",
-    "micros/publish": "npm run dist && bash dockerify.sh",
-    "micros/deploy": "micros service:deploy frogmarch -f frogmarch.sd.yml -e adev"
+    "micros/publish-and-deploy": "npm run dist && bash dockerify.sh"
   },
   "keywords": [
     "npm",
