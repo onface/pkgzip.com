@@ -19,4 +19,4 @@ rm -f frogmarch.sd.yml.bak
 
 # publish to micros in fast mode
 sleep 10
-micros service:update frogmarch -f frogmarch.sd.yml -e adev
+micros service:deploy frogmarch -f frogmarch.sd.yml -e adev
