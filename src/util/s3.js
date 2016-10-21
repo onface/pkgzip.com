@@ -22,7 +22,7 @@ function s3Config() {
 
 function newS3() {
   const config = s3Config();
-  console.log('s3 config', JSON.stringify(config));
+  console.log('s3 config', JSON.stringify(config)); // eslint-disable-line
   return new AWS.S3(config);
 }
 

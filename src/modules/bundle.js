@@ -17,7 +17,7 @@ const Bundle = requestedPkgs => (
     download(cdnFilename).then((cdnBody) => {
       resolve(cdnBody); // maybe this block can be skipped
     }).catch((e) => {
-      console.error('catch-after-dl', e, e.stack);
+      console.error('catch-after-dl', e, e.stack); // eslint-disable-line
       const tempPath = path.resolve('./temp');
       const allPromises = requestedPkgs.map(
         pkg => npmInstall({ allPkgNames, tempPath, fs, finalPath: `/${reqId}/node_modules` }, pkg)
@@ -35,8 +35,8 @@ const Bundle = requestedPkgs => (
           const resultJs = fs.readFileSync(`/${reqId}/bundle.js`, 'utf8');
           upload(cdnFilename, resultJs).then(() => resolve(resultJs));
         });
-      }).catch((e) => {
-        console.error(e, e.stack); // eslint-disable-line no-console
+      }).catch((err) => {
+        console.error(err, err.stack); // eslint-disable-line no-console
         throw new Error(e);
       });
     });
