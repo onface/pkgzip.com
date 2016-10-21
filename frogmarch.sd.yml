@@ -2,9 +2,9 @@ name: Frogmarch
 description: Frogmarch
 links:
   binary:
-    type: npm
-    artifactId: '@atlassian/frogmarch'
-    version: 0.0.5
+    type: docker
+    artifactId: docker.atlassian.io/bgummer/bonsai
+    version: v0.0.5
   healthcheck:
     uri: /healthcheck
   source:
