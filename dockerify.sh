@@ -16,6 +16,8 @@ docker push "$NEW_IMAGE"
 # write new version to micros service descriptor
 sed -i .bak "s/tag: .*/tag: v${NEW_VERSION}/" frogmarch.sd.yml
 rm -f frogmarch.sd.yml.bak
+git add frogmarch.sd.yml
+git commit -m "chore: updating service descriptor to v$NEW_VERSION"
 
 # publish to micros in fast mode
 sleep 10

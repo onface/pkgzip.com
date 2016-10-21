@@ -1,7 +1,7 @@
 {
   "name": "@atlassian/frogmarch",
   "version": "0.0.9",
-  "description": "Serves a single script with your npm modules webpacked.",
+  "description": "Frogmarches your npm packages via webpack into a single JS file",
   "main": "dist/index.js",
   "scripts": {
     "dev": "babel-node -- src/index.js",

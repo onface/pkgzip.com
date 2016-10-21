@@ -4,7 +4,7 @@ links:
   binary:
     type: docker
     name: docker.atlassian.io/bgummer/frogmarch
-    tag: v0.0.8
+    tag: v0.0.9
   healthcheck:
     uri: /healthcheck
   source:
