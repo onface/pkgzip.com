@@ -4,11 +4,14 @@ links:
   binary:
     type: docker
     name: docker.atlassian.io/bgummer/frogmarch
-    tag: v0.0.7
+    tag: v0.0.8
   healthcheck:
     uri: /healthcheck
   source:
     url: 'https://bitbucket.org/atlassian/frogmarch'
+loadBalancer:
+  connectionTimeout: 300
+  connectionDrainingTimeout: 300
 notifications:
   email: bgummer@atlassian.com
 organization: Design Platform
