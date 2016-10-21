@@ -16,7 +16,8 @@ const Bundle = requestedPkgs => (
 
     download(cdnFilename).then((cdnBody) => {
       resolve(cdnBody); // maybe this block can be skipped
-    }).catch(() => {
+    }).catch((e) => {
+      console.error('catch-after-dl', e, e.stack);
       const tempPath = path.resolve('./temp');
       const allPromises = requestedPkgs.map(
         pkg => npmInstall({ allPkgNames, tempPath, fs, finalPath: `/${reqId}/node_modules` }, pkg)
