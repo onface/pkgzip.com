@@ -3,8 +3,8 @@ description: Frogmarch
 links:
   binary:
     type: docker
-    name: docker.atlassian.io/bgummer/bonsai
-    version: v0.0.7
+    name: docker.atlassian.io/bgummer/frogmarch
+    tag: v0.0.7
   healthcheck:
     uri: /healthcheck
   source:
