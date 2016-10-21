@@ -21,4 +21,4 @@ git commit -m "chore: updating service descriptor to v$NEW_VERSION"
 
 # publish to micros in fast mode
 sleep 10
-micros service:deploy frogmarch -f frogmarch.sd.yml -e adev
+micros service:update frogmarch -f frogmarch.sd.yml -e adev
