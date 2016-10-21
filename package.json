@@ -11,6 +11,7 @@
     "test": "mocha --compilers js:babel-register",
     "dist": "npm run lint && babel src --out-dir dist",
     "start": "node dist/index.js",
+    "nanos": "nanos service:deploy myservicename -f frogmarch.sd.yml -v --foreground -t 20000",
     "micros/publish-and-deploy/full": "npm run dist && bash dockerify.sh deploy",
     "micros/publish-and-deploy/fast": "npm run dist && bash dockerify.sh update"
   },
