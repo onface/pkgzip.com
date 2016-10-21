@@ -1,6 +1,6 @@
 # frogmarch
 
-Serves a single script file with your npm modules webpacked.
+Frogmarches your npm packages via webpack into a single JS file.
 
 Currently in testing, will be deployed to micros soon. Ideal for Connect developers to consume AtlasKit components.
 
@@ -16,3 +16,5 @@ Currently in testing, will be deployed to micros soon. Ideal for Connect develop
 npm install
 npm run dev
 ```
+
+![Frogmarch](https://bitbucket.org/repo/qbqoG9/images/2351310935-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)
