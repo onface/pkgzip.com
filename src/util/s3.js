@@ -22,6 +22,7 @@ function s3Config() {
 
 function newS3() {
   const config = s3Config();
+  console.log('s3 config', JSON.stringify(config));
   return new AWS.S3(config);
 }
 
