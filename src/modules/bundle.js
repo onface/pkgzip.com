@@ -35,7 +35,7 @@ const Bundle = requestedPkgs => (
           upload(cdnFilename, resultJs).then(() => resolve(resultJs));
         });
       }).catch((e) => {
-        console.error(e); // eslint-disable-line no-console
+        console.error(e, e.stack); // eslint-disable-line no-console
         throw new Error(e);
       });
     });

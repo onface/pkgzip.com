@@ -44,17 +44,22 @@ function upload(filename, contents) {
 
 function download(filename) {
   return new Promise((resolve, reject) => {
-    newS3().getObject({
-      Bucket: S3_BUCKET,
-      Key: `${S3_BUCKET_PATH}${filename}`,
-    }, (err, data) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      console.log('s3:download', filename, err); // eslint-disable-line
-      resolve(data.Body.toString('utf-8'));
-    });
+    try {
+      newS3().getObject({
+        Bucket: S3_BUCKET,
+        Key: `${S3_BUCKET_PATH}${filename}`,
+      }, (err, data) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        console.log('s3:download', filename, err); // eslint-disable-line
+        resolve(data.Body.toString('utf-8'));
+      });
+    } catch (e) {
+      console.error(e, e.stack); // eslint-disable-line
+      reject(e);
+    }
   });
 }
 
