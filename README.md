@@ -17,6 +17,14 @@ npm install
 npm run dev
 ```
 
+### Deploying to micros
+
+```bash
+npm run micros/publish-and-deploy/full # replaces the entire stack
+```
+
+If you want a faster but riskier update, replace `full` with `fast`.
+
 ### wtf frogmarch
 
 ![Screen Shot 2016-10-21 at 11.00.02 am.png](https://bitbucket.org/repo/qbqoG9/images/3560229856-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)
