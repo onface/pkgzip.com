@@ -27,4 +27,4 @@ If you want a faster but riskier update, replace `full` with `fast`.
 
 ### wtf frogmarch
 
-![Screen Shot 2016-10-21 at 11.00.02 am.png](https://bitbucket.org/repo/qbqoG9/images/3560229856-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)
+![Frogmarching a frog](https://bitbucket.org/repo/qbqoG9/images/3560229856-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)
