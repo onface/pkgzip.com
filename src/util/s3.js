@@ -7,7 +7,7 @@ const S3_BUCKET_PATH = process.env.S3_CACHE_BUCKET_PATH || '';
 const ACCESS_KEY_ID = process.env.ACCESS_KEY_ID || process.env.FROG_ACCESS_KEY_ID;
 const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY || process.env.FROG_SECRET_ACCESS_KEY;
 
-// Micros auto-authenticates with S3 so only need to pass locally
+// Micros auto-authenticates with S3 so only need to pass auth locally
 function s3Config() {
   return process.env.S3_CACHE_BUCKET_NAME
     ? {
@@ -22,52 +22,45 @@ function s3Config() {
 
 function newS3() {
   const config = s3Config();
-  console.log('s3env', JSON.stringify({ S3_BUCKET, S3_REGION, S3_BUCKET_PATH, ACCESS_KEY_ID, SECRET_ACCESS_KEY }));
-  console.log('s3 config', JSON.stringify(config)); // eslint-disable-line
   return new AWS.S3(config);
+}
+
+function pathify(filename) {
+  return `${S3_BUCKET_PATH}/${filename}`;
 }
 
 function upload(filename, contents) {
   return new Promise((resolve, reject) => {
-    try {
-      newS3().putObject({
-        Bucket: S3_BUCKET,
-        Key: `${S3_BUCKET_PATH}/${filename}`,
-        Body: contents,
-      }, (err, data) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        console.log('s3:upload', filename, err, data); // eslint-disable-line
-        resolve();
-      });
-    } catch (e) {
-      console.error(e, e.stack); // eslint-disable-line
-      reject(e);
-    }
+    newS3().putObject({
+      Bucket: S3_BUCKET,
+      Key: pathify(filename),
+      Body: contents,
+    }, (err) => {
+      if (err) {
+        console.log(`Got error uploading '${filename}' to S3. ${JSON.stringify(err)}`); // eslint-disable-line no-console
+        reject(err);
+        return;
+      }
+      console.log(`Uploaded '${filename}' to S3`); // eslint-disable-line no-console
+      resolve();
+    });
   });
 }
 
 function download(filename) {
   return new Promise((resolve, reject) => {
-    try {
-      newS3().getObject({
-        Bucket: S3_BUCKET,
-        Key: `${S3_BUCKET_PATH}/${filename}`,
-      }, (err, data) => {
-        if (err) {
-          console.log('file does not exist'); // eslint-disable-line
-          reject(err);
-          return;
-        }
-        console.log('s3:download', filename, err); // eslint-disable-line
-        resolve(data.Body.toString('utf-8'));
-      });
-    } catch (e) {
-      console.error(e, e.stack); // eslint-disable-line
-      reject(e);
-    }
+    newS3().getObject({
+      Bucket: S3_BUCKET,
+      Key: pathify(filename),
+    }, (err, data) => {
+      if (err) {
+        console.log(`No cache found for '${filename}'`); // eslint-disable-line no-console
+        reject(err);
+        return;
+      }
+      console.log(`Downloaded cached '${filename}' from S3`, filename, err); // eslint-disable-line no-console
+      resolve(data.Body.toString('utf-8'));
+    });
   });
 }
 
