@@ -17,7 +17,7 @@ const Bundle = requestedPkgs => (
     download(cdnFilename).then((cdnBody) => {
       resolve(cdnBody); // maybe this block can be skipped
     }).catch((e) => {
-      console.error('catch-after-dl', e, e.stack); // eslint-disable-line
+      console.error('bundling because not cached'); // eslint-disable-line
       const tempPath = path.resolve('./temp');
       const allPromises = requestedPkgs.map(
         pkg => npmInstall({ allPkgNames, tempPath, fs, finalPath: `/${reqId}/node_modules` }, pkg)

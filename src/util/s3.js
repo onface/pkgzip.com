@@ -11,7 +11,7 @@ const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY || process.env.FROG_SECR
 function s3Config() {
   return process.env.S3_CACHE_BUCKET_NAME
     ? {
-      region: S3_REGION,
+      // region: S3_REGION,
     }
     : {
       accessKeyId: ACCESS_KEY_ID,
@@ -22,24 +22,30 @@ function s3Config() {
 
 function newS3() {
   const config = s3Config();
+  console.log('s3env', JSON.stringify({ S3_BUCKET, S3_REGION, S3_BUCKET_PATH, ACCESS_KEY_ID, SECRET_ACCESS_KEY }));
   console.log('s3 config', JSON.stringify(config)); // eslint-disable-line
   return new AWS.S3(config);
 }
 
 function upload(filename, contents) {
   return new Promise((resolve, reject) => {
-    newS3().putObject({
-      Bucket: S3_BUCKET,
-      Key: `${S3_BUCKET_PATH}${filename}`,
-      Body: contents,
-    }, (err, data) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      console.log('s3:upload', filename, err, data); // eslint-disable-line
-      resolve();
-    });
+    try {
+      newS3().putObject({
+        Bucket: S3_BUCKET,
+        Key: `${S3_BUCKET_PATH}/${filename}`,
+        Body: contents,
+      }, (err, data) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        console.log('s3:upload', filename, err, data); // eslint-disable-line
+        resolve();
+      });
+    } catch (e) {
+      console.error(e, e.stack); // eslint-disable-line
+      reject(e);
+    }
   });
 }
 
@@ -48,9 +54,10 @@ function download(filename) {
     try {
       newS3().getObject({
         Bucket: S3_BUCKET,
-        Key: `${S3_BUCKET_PATH}${filename}`,
+        Key: `${S3_BUCKET_PATH}/${filename}`,
       }, (err, data) => {
         if (err) {
+          console.log('file does not exist'); // eslint-disable-line
           reject(err);
           return;
         }
