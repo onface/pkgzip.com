@@ -11,7 +11,7 @@ const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY || process.env.FROG_SECR
 function s3Config() {
   return process.env.S3_CACHE_BUCKET_NAME
     ? {
-      // region: S3_REGION,
+      region: S3_REGION,
     }
     : {
       accessKeyId: ACCESS_KEY_ID,
