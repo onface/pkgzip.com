@@ -8,7 +8,7 @@
     <title>Frogmarch demo page</title>
     <meta name="description" content="Your friendly Atlassian web component library.">
 
-    <script src="/bundle.js?packages=ak-navigation@11.2.1,ak-icon"></script>
+    <script src="/bundle.min.js?packages=ak-navigation,ak-icon"></script>
     <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -34,8 +34,29 @@
       background-color: #F0F2F5;
       border-radius: 4px;
       display: inline-block;
-      margin: 1em 0;
       padding: 24px;
+    }
+
+    h2, h3 {
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 32px;
+    }
+
+    a {
+      color: #1251ae;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
     </style>
   </head>
@@ -48,13 +69,13 @@
         container-name="Frogmarch demo"
         container-href="/"
       >
-  	    <ak-icon glphy="atlassian" slot="global-home"></ak-icon>
+  	    <ak-icon-atlassian slot="global-home"></ak-icon-atlassian>
         <ak-navigation-link href="/">
-          <ak-icon glyph="dashboard" slot="icon"></ak-icon>
+          <ak-icon-dashboard slot="icon"></ak-icon-dashboard>
           Menu one
         </ak-navigation-link>
         <ak-navigation-link href="/">
-          <ak-icon glyph="bitbucket-repos" slot="icon"></ak-icon>
+          <ak-icon-bitbucket-repos slot="icon"></ak-icon-bitbucket-repos>
           Menu two
         </ak-navigation-link>
       </ak-navigation>
@@ -71,12 +92,15 @@
         </p>
 
         <code>
-          &lt;script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-icon@8.4.0"&gt;&lt;/script&gt;
+          &lt;script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.min.js?packages=ak-navigation@latest,ak-icon@8.x"&gt;&lt;/script&gt;
         </code>
 
         <h3>API</h3>
         <p>You can use semver ranges when specifying package versions. Results are cached to S3.</p>
-        <p>Please see <a href="https://bitbucket.org/atlassian/frogmarch/">README.md</a> for the full details.</p>
+        <p>Please see <a href="https://bitbucket.org/atlassian/frogmarch/">frogmarch/README.md</a> for the full details.</p>
+
+        <h3>Use it with AtlasKit</h3>
+        <p>You can build your own custom bundle of AtlasKit components via the <a href="https://aui-cdn.atlassian.com/atlaskit/registry/frogmarch.html">AtlasKit Registry</a>.</p>
       </div>
     </ak-page>
   </body>

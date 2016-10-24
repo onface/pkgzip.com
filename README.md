@@ -20,7 +20,7 @@ Package versions can be specified with the common [semver](http://semver.org) fo
 -  Tilde versions - `ak-navigation@~11.2.1`
 -  ..as well as `<1.x <=1.x >=1.x >1.x`
 
-Currently output is bundled but unminified. Soon there will be a `bundle.min.js` endpoint exposed for this.
+By default results are bundled but unminified. Use `bundle.min.js` to enable minification.
 
 ### Caching
 

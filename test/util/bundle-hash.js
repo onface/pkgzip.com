@@ -6,59 +6,43 @@ import hashBundle from '../../src/util/bundle-hash';
 const expect = chai.expect;
 
 describe('hashBundle()', () => {
-  it('should hash based on packages array and minifed flag', () => {
-    const expectations = [
-      [
-        [
-          { pkgName: 'package-one', pkgVersion: '0.0.1' },
-        ],
-        false,
-        '7cd906443e1236f5c4517b5dd7f3fb667fcaec7b88c1f4bbdeacbfef6cc5e58b',
-      ],
-      [
-        [
-          { pkgName: 'package-one', pkgVersion: '0.0.2' },
-        ],
-        false,
-        '2e3fc7e10f4eb49aa64f860fcaad35c01b711b6ef08028d210536fc59379711e',
-      ],
-      [
-        [
-          { pkgName: 'package-one', pkgVersion: '0.0.1' },
-          { pkgName: 'package-two', pkgVersion: '0.0.1' },
-        ],
-        false,
-        'ecee67c62e0d64dfa19bd2125054e95d014a1fa263dcbc729d2c36dd4dd81069',
-      ],
-      [
-        [
-          { pkgName: 'package-one', pkgVersion: '0.0.1' },
-        ],
-        true,
-        '0581393ed7fcce79961d1c428bcf39c0166f6bdb58c1cd22a551d670fff02709',
-      ],
-      [
-        [
-          { pkgName: 'package-one', pkgVersion: '0.0.2' },
-        ],
-        true,
-        '25ddb4ccc3f4c4609d3f064b7303623577aa7d549bc9089bb6a806802987cec4',
-      ],
-      [
-        [
-          { pkgName: 'package-one', pkgVersion: '0.0.1' },
-          { pkgName: 'package-two', pkgVersion: '0.0.1' },
-        ],
-        true,
-        '3fcbcb7fa7cc49caa39ec6ffc74bf8f43733a5091a05f78dcc63d9a7e95c206e',
-      ],
-    ];
+  it('should update hash based on packages array', () => {
+    const buildFlags = { minify: true };
 
-    expectations.forEach((ex) => {
-      const hash = hashBundle(ex[0], ex[1]);
-      expect(hash).to.equal(ex[2]);
-      expect(hash.length).to.equal(64); // length must be < 1024 for AWS S3 keys
-    });
+    const hashResultA = hashBundle([
+      { pkgName: 'package-one', pkgVersion: '0.0.1' },
+    ], buildFlags);
+
+    const hashResultB = hashBundle([
+      { pkgName: 'package-one', pkgVersion: '0.0.2' },
+    ], buildFlags);
+
+    const hashResultC = hashBundle([
+      { pkgName: 'package-two', pkgVersion: '0.0.1' },
+    ], buildFlags);
+
+    const hashResultD = hashBundle([
+      { pkgName: 'package-two', pkgVersion: '0.0.2' },
+    ], buildFlags);
+
+    expect(hashResultA).to.equal('032d2581264e0351bb6d9d784f637edbd1133c4cab87cfa636469df2d5f8a54f');
+    expect(hashResultB).to.equal('9766a4e8a97b523650ab8552d88cdbb4cd300bdc6a87ad41e1529e24bb77124c');
+    expect(hashResultC).to.equal('27388f5189eeeeb447087454975dbb15fd38c4a0683cd73fcac495f98f06b457');
+    expect(hashResultD).to.equal('cc16ac1a570685029e57603e41990357e96c78d05cb5e2ae88dc744cfe00d89d');
+
+    expect(hashResultA.length).to.equal(64); // length must be < 1024 for AWS S3 keys
+  });
+
+  it('should update hash based on build flags array', () => {
+    const packages = [{ pkgName: 'package-one', pkgVersion: '0.0.1' }];
+
+    const hashResultA = hashBundle(packages, { minify: false });
+    const hashResultB = hashBundle(packages, { minify: true });
+
+    expect(hashResultA).to.equal('4f27c03f0c37f504964bd96ee4a3408a1eeefc79715a6615e29acc87bc3eebac');
+    expect(hashResultB).to.equal('032d2581264e0351bb6d9d784f637edbd1133c4cab87cfa636469df2d5f8a54f');
+
+    expect(hashResultA.length).to.equal(64); // length must be < 1024 for AWS S3 keys
   });
 
   it('should throw if no package name provided', () => {
@@ -81,7 +65,7 @@ describe('hashBundle()', () => {
     expect(() => (hashBundle(undefined, false))).to.not.throw();
   });
 
-  it('should not throw if minified flag is omitted', () => {
+  it('should not throw if build flags obj omitted', () => {
     expect(() => (hashBundle([]))).to.not.throw();
   });
 
@@ -90,8 +74,23 @@ describe('hashBundle()', () => {
     expect(hashBundle()).to.equal(explicitValue);
   });
 
-  it('should treat omitted minified flag as false', () => {
-    const explicitValue = hashBundle([], false);
+  it('should ignore unknown build flags', () => {
+    const explicitValue = hashBundle([], { minify: true });
+    expect(hashBundle([], { minify: true, extraneousKey: true })).to.equal(explicitValue);
+  });
+
+  it('should treat omitted build flags obj as obj with default vals', () => {
+    const explicitValue = hashBundle([], { minify: false });
     expect(hashBundle([])).to.equal(explicitValue);
+  });
+
+  it('should treat truthy flags as boolean true', () => {
+    const explicitValue = hashBundle([], { minify: true });
+    expect(hashBundle([], { minify: 1 })).to.equal(explicitValue);
+  });
+
+  it('should treat falsy flags as boolean false', () => {
+    const explicitValue = hashBundle([], { minify: false });
+    expect(hashBundle([], { minify: 0 })).to.equal(explicitValue);
   });
 });

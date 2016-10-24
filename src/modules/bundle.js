@@ -7,10 +7,10 @@ import { TIMER_WEBPACK_EXECUTION } from '../util/timer-keys';
 
 import webpackGen from '../util/webpack';
 
-const Bundle = (requestedPkgs = [], isMinified = false) => (
+const Bundle = (buildFlags = {}, requestedPkgs = []) => (
   new Promise((resolve, reject) => {
     const allPkgNames = requestedPkgs.map(pkg => pkg.pkgName);
-    const hash = bundleHash(requestedPkgs, isMinified);
+    const hash = bundleHash(requestedPkgs, buildFlags);
     const cdnFilename = `${hash}.js`;
 
     download(cdnFilename).then((cdnBody) => {
@@ -24,7 +24,7 @@ const Bundle = (requestedPkgs = [], isMinified = false) => (
         const entryContents = allPkgNames.map(pkg => `\nwindow.${camelcase(pkg)} = require('${pkg}');`).join('');
         fs.writeFileSync(entryFile, entryContents);
 
-        const compiler = webpackGen({ buildDir });
+        const compiler = webpackGen({ buildDir, buildFlags });
 
         console.time(TIMER_WEBPACK_EXECUTION); // eslint-disable-line no-console
         compiler.run((err) => {

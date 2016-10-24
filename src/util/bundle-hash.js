@@ -1,7 +1,16 @@
 import sha256 from 'js-sha256';
 
-// TODO: sort packages
-function hashBundle(requestedPkgs = [], isMinified = false) {
+function hashBundle(requestedPkgs = [], flags = {}) {
+  // build obj of known flags
+  const presentValues = {};
+  ['minify'].forEach((flag) => {
+    const flagVal = flags[flag];
+    if (typeof flagVal !== 'undefined') presentValues[flag] = !!flagVal;
+  });
+
+  // Override default vals with supplied flags
+  const buildFlags = Object.assign({ minify: false }, presentValues);
+
   return sha256(JSON.stringify({
     packages: requestedPkgs.map((pkg) => {
       const { pkgName, pkgVersion } = pkg;
@@ -10,7 +19,7 @@ function hashBundle(requestedPkgs = [], isMinified = false) {
       }
       return { name: pkgName, ver: pkgVersion };
     }),
-    isMinified: isMinified ? 1 : 0,
+    buildFlags,
   }));
 }
 

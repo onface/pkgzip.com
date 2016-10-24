@@ -1,7 +1,23 @@
 import webpack from 'webpack';
 
 export default function (opts) {
-  const { buildDir } = opts;
+  const { buildDir, buildFlags } = opts;
+
+  const selectedPlugins = [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+  ];
+
+  if (buildFlags.minify) {
+    selectedPlugins.push(
+      new webpack.optimize.UglifyJsPlugin({
+        include: 'bundle.js',
+      })
+    );
+  }
 
   const compiler = webpack({
     context: buildDir,
@@ -14,13 +30,7 @@ export default function (opts) {
     resolve: {
       root: `${buildDir}/node_modules`,
     },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
-    ],
+    plugins: selectedPlugins,
   });
 
   return compiler;
