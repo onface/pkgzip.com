@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+import { TIMER_S3_UPLOAD, TIMER_S3_DOWNLOAD } from './timer-keys';
 
 // first option is micros, second option is fallback
 const S3_BUCKET = process.env.S3_CACHE_BUCKET_NAME || process.env.FROG_S3_CACHE_BUCKET_NAME;
@@ -30,12 +31,14 @@ function pathify(filename) {
 }
 
 function upload(filename, contents) {
+  console.time(TIMER_S3_UPLOAD); // eslint-disable-line no-console
   return new Promise((resolve, reject) => {
     newS3().putObject({
       Bucket: S3_BUCKET,
       Key: pathify(filename),
       Body: contents,
     }, (err) => {
+      console.timeEnd(TIMER_S3_UPLOAD); // eslint-disable-line no-console
       if (err) {
         console.log(`Got error uploading '${filename}' to S3. ${JSON.stringify(err)}`); // eslint-disable-line no-console
         reject(err);
@@ -48,11 +51,13 @@ function upload(filename, contents) {
 }
 
 function download(filename) {
+  console.time(TIMER_S3_DOWNLOAD); // eslint-disable-line no-console
   return new Promise((resolve, reject) => {
     newS3().getObject({
       Bucket: S3_BUCKET,
       Key: pathify(filename),
     }, (err, data) => {
+      console.timeEnd(TIMER_S3_DOWNLOAD); // eslint-disable-line no-console
       if (err) {
         console.log(`No cache found for '${filename}'`); // eslint-disable-line no-console
         reject(err);
