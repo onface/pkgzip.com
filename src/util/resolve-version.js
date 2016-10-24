@@ -19,7 +19,9 @@ function getVersions(pkgName, req) {
 
 function resolveVersion(pkgName, pkgRange, req = request) {
   return getVersions(pkgName, req).then((pkgVersions) => {
-    const newestMatch = pkgVersions.find(pkgVer => semver.satisfies(pkgVer, pkgRange));
+    const newestMatch = pkgVersions.find(pkgVer => (
+      !pkgRange || pkgRange === 'latest' || semver.satisfies(pkgVer, pkgRange)
+    ));
     return {
       pkgName,
       pkgVersion: newestMatch,

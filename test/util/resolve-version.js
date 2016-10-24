@@ -86,6 +86,18 @@ describe('resolveVersion()', () => {
         { pkgName: 'ak-button', pkgVersion: '1.0.0' }
       )
     ));
+
+    it('should return latest if no version requested supplied', () => (
+      expect(resolveVersion('ak-button', '', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
+      )
+    ));
+
+    it('should return latest if "latest" supplied', () => (
+      expect(resolveVersion('ak-button', 'latest', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
+      )
+    ));
   });
 
   describe('failure cases', () => {
