@@ -7,7 +7,7 @@ import { TIMER_YARN_INSTALL_TOTAL } from './timer-keys';
 function createPkgJsonFile(packages, buildDir) {
   return new Promise((resolve) => {
     const pkgJsonFile = `${buildDir}/package.json`;
-    const pkgJsonSource = { dependencies: {} };
+    const pkgJsonSource = { license: 'ISC', dependencies: {} };
     packages.forEach((pkg) => { pkgJsonSource.dependencies[pkg.pkgName] = pkg.pkgVersion; });
 
     fs.writeFileSync(pkgJsonFile, JSON.stringify(pkgJsonSource));
