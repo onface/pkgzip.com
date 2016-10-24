@@ -10,6 +10,22 @@ Currently in testing, will be deployed to micros soon. Ideal for Connect develop
 <script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-button@1.6.0"></script>
 ```
 
+### API
+
+Package versions can be specified with the common [semver](http://semver.org) formats:
+
+-  Fixed versions - `ak-navigation@11.2.1`
+-  .x versions - `ak-navigation@11.x`
+-  Caret versions - `ak-navigation@^11.2.1`
+-  Tilde versions - `ak-navigation@~11.2.1`
+-  ..as well as `<1.x <=1.x >=1.x >1.x`
+
+Currently output is bundled but unminified. Soon there will be a `bundle.min.js` endpoint exposed for this.
+
+### Caching
+
+After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time.
+
 ### Dev setup
 
 ```bash

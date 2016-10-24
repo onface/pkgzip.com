@@ -21,12 +21,19 @@
     }
 
     code, pre {
-      background-color: #F0F2F5;
-      border-radius: 4px;
-      display: inline-block;
       font-family: "SF Mono", "Segoe UI Mono", "Roboto Mono", "Ubuntu Mono", Menlo, Courier, monospace;
       font-size: 12px;
       font-weight: normal;
+    }
+
+    pre {
+      display: inline;
+    }
+
+    code {
+      background-color: #F0F2F5;
+      border-radius: 4px;
+      display: inline-block;
       margin: 1em 0;
       padding: 24px;
     }
@@ -62,9 +69,14 @@
         <p>
           You can get going by including a script such as:
         </p>
+
         <code>
           &lt;script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-icon@8.4.0"&gt;&lt;/script&gt;
         </code>
+
+        <h3>API</h3>
+        <p>You can use semver ranges when specifying package versions. Results are cached to S3.</p>
+        <p>Please see <a href="https://bitbucket.org/atlassian/frogmarch/">README.md</a> for the full details.</p>
       </div>
     </ak-page>
   </body>
