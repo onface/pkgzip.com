@@ -7,7 +7,7 @@ Currently in testing, will be deployed to micros soon. Ideal for Connect develop
 ### Usage
 
 ```html
-<script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-button@1.6.0"></script>
+<script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-button"></script>
 ```
 
 ### API
