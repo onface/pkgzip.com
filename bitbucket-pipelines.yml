@@ -1,0 +1,8 @@
+image: node:6
+
+pipelines:
+  default:
+    - step:
+        script:
+          - npm install
+          - npm run dist # runs lint + test as well
