@@ -29,7 +29,7 @@ After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation
 ### Dev setup
 
 ```bash
-npm install
+yarn # or `npm install`
 npm run dev
 ```
 
