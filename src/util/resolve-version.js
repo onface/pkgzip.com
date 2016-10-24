@@ -1,9 +1,9 @@
 import request from 'request';
 import semver from 'semver';
 
-function getVersions(pkgName, req) {
+function getVersions(pkgName) {
   return new Promise((resolve) => {
-    req.get({
+    request.get({
       url: `https://registry.npmjs.org/${pkgName}`,
       json: true,
     }, (err, resp, body) => {
@@ -17,8 +17,8 @@ function getVersions(pkgName, req) {
   });
 }
 
-function resolveVersion(pkgName, pkgRange, req = request) {
-  return getVersions(pkgName, req).then((pkgVersions) => {
+function resolveVersion(pkgName, pkgRange) {
+  return getVersions(pkgName).then((pkgVersions) => {
     const newestMatch = pkgVersions.find(pkgVer => (
       !pkgRange || pkgRange === 'latest' || semver.satisfies(pkgVer, pkgRange)
     ));
@@ -28,5 +28,7 @@ function resolveVersion(pkgName, pkgRange, req = request) {
     };
   });
 }
+
+module.exports = resolveVersion;
 
 export default resolveVersion;
