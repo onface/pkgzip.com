@@ -1,17 +1,17 @@
 import camelcase from 'camelcase';
 import fs from 'fs';
-import sha256 from 'js-sha256';
 import yarnInstall from '../util/yarn';
+import bundleHash from '../util/bundle-hash';
 import { upload, download } from '../util/s3';
 import { TIMER_WEBPACK_EXECUTION } from '../util/timer-keys';
 
 import webpackGen from '../util/webpack';
 
-const Bundle = requestedPkgs => (
+const Bundle = (requestedPkgs = [], isMinified = false) => (
   new Promise((resolve) => {
     const allPkgNames = requestedPkgs.map(pkg => pkg.pkgName);
-    const bundleHash = sha256(JSON.stringify(requestedPkgs)); // TODO: sort packages
-    const cdnFilename = `${bundleHash}.js`;
+    const hash = bundleHash(requestedPkgs, isMinified);
+    const cdnFilename = `${hash}.js`;
 
     download(cdnFilename).then((cdnBody) => {
       resolve(cdnBody); // maybe this block can be skipped

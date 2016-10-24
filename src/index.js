@@ -1,5 +1,8 @@
 import express from 'express';
+import deepEqual from 'lodash.isequal';
 import bundleFn from './modules/bundle';
+import expandVersions from './util/expand-versions';
+import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 
 const app = express();
 
@@ -20,15 +23,26 @@ app.get('/bundle.js', (req, res) => {
     const [pkgName, pkgVersion] = pkgDef.split('@');
     return { pkgName, pkgVersion };
   });
-  bundleFn(requestedPkgs).then((result) => {
+  expandVersions(requestedPkgs).then((expandedPackages) => {
+    if (deepEqual(requestedPkgs, expandedPackages)) {
+      return expandedPackages;
+    }
+    const rebuiltPackages = expandedPackages.map(pkg => `${pkg.pkgName}@${pkg.pkgVersion}`).join(',');
+    res.redirect(`/bundle.js?packages=${rebuiltPackages}`);
+    throw new Error(ERR_EXPANSION_NEEDS_REDIRECT);
+  })
+  .then(bundleFn).then((result) => {
     // TODO test: 200 returned if promise resolves
     // TODO test: http response body === resolve result
     // TODO test: http response content type is good for JS
     res.header('Content-Type', 'application/javascript');
     res.send(result);
-  }).catch((e) => {
-    // TODO test 500 returned if promise rejects
-    res.send(500, e.toString());
+  })
+  .catch((e) => {
+    if (![ERR_EXPANSION_NEEDS_REDIRECT].includes(e.message)) {
+      // TODO test 500 returned if promise rejects
+      res.status(500).send(e.toString());
+    }
   });
 });
 
