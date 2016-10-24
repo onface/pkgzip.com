@@ -8,7 +8,7 @@ import { TIMER_WEBPACK_EXECUTION } from '../util/timer-keys';
 import webpackGen from '../util/webpack';
 
 const Bundle = (requestedPkgs = [], isMinified = false) => (
-  new Promise((resolve) => {
+  new Promise((resolve, reject) => {
     const allPkgNames = requestedPkgs.map(pkg => pkg.pkgName);
     const hash = bundleHash(requestedPkgs, isMinified);
     const cdnFilename = `${hash}.js`;
@@ -32,7 +32,13 @@ const Bundle = (requestedPkgs = [], isMinified = false) => (
           if (err) throw new Error(err);
 
           const resultJs = fs.readFileSync(`${buildDir}/bundle.js`, 'utf8');
-          upload(cdnFilename, resultJs).then(() => resolve(resultJs));
+          upload(cdnFilename, resultJs).then(() => resolve(resultJs)).catch((e2) => {
+            if (resultJs) {
+              resolve(resultJs);
+              return;
+            }
+            reject(e2);
+          });
         });
       }).catch((err) => {
         console.error(err, err.stack); // eslint-disable-line no-console
