@@ -1,14 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Frogmarch Test</title>
-        <script src="/bundle.js?packages=ak-navigation@11.2.1,ak-button@1.6.0"></script>
-    </head>
-    <body>
-        <ak-button>test</ak-button>
-        <div style="margin-left: 100px">
-            <ak-navigation>test</ak-navigation>
-        </div>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Frogmarch demo page</title>
+    <meta name="description" content="Your friendly Atlassian web component library.">
+
+    <script src="/bundle.js?packages=ak-navigation@11.2.1,ak-icon@8.4.0"></script>
+    <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 14px,
+    }
+
+    .page {
+      margin-left: 320px;
+      margin-right: 40px;
+    }
+
+    code, pre {
+      background-color: #F0F2F5;
+      border-radius: 4px;
+      display: inline-block;
+      font-family: "SF Mono", "Segoe UI Mono", "Roboto Mono", "Ubuntu Mono", Menlo, Courier, monospace;
+      font-size: 12px;
+      font-weight: normal;
+      margin: 1em 0;
+      padding: 24px;
+    }
+    </style>
+  </head>
+  <body>
+    <ak-page layout="fixed" navigation-open>
+      <ak-navigation
+        open
+        slot="navigation"
+        container-logo="https://s3.amazonaws.com/uploads.hipchat.com/10804/576067/VtJT4vjBKJXG5GI/Group%204.png"
+        container-name="Frogmarch demo"
+        container-href="/"
+      >
+  	    <ak-icon glphy="atlassian" slot="global-home"></ak-icon>
+        <ak-navigation-link href="/">
+          <ak-icon glyph="dashboard" slot="icon"></ak-icon>
+          Menu one
+        </ak-navigation-link>
+        <ak-navigation-link href="/">
+          <ak-icon glyph="bitbucket-repos" slot="icon"></ak-icon>
+          Menu two
+        </ak-navigation-link>
+      </ak-navigation>
+      <div class="page">
+        <h2>Frogmarch</h2>
+        <p>
+          Frogmarch is a service which gives you a simple bundle of any npm packages you ask for. It uses webpack to create the bundle.
+        </p>
+        <p>
+          This is handy when you want to create a simple site without adding webpack to your build pipeline.
+        </p>
+        <p>
+          You can get going by including a script such as:
+        </p>
+        <code>
+          &lt;script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-icon@8.4.0"&gt;&lt;/script&gt;
+        </code>
+      </div>
+    </ak-page>
+  </body>
 </html>
