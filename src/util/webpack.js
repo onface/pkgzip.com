@@ -1,18 +1,18 @@
 import webpack from 'webpack';
 
 export default function (opts) {
-  const { reqId, fs } = opts;
+  const { buildDir } = opts;
 
   const compiler = webpack({
-    context: `/${reqId}/`,
+    context: buildDir,
     entry: './entry.js',
     output: {
       filename: 'bundle.js',
-      path: `/${reqId}/`,
+      path: buildDir,
       libraryTarget: 'umd',
     },
     resolve: {
-      root: `/${reqId}/node_modules`,
+      root: `${buildDir}/node_modules`,
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -22,10 +22,6 @@ export default function (opts) {
       }),
     ],
   });
-  compiler.outputFileSystem = fs;
-  compiler.inputFileSystem = fs;
-  compiler.resolvers.normal.fileSystem = fs;
-  compiler.resolvers.context.fileSystem = fs;
 
   return compiler;
 }
