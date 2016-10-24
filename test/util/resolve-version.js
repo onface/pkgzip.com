@@ -46,31 +46,45 @@ describe('resolveVersion()', () => {
     };
 
     it('should handle N.x version format', () => (
-      expect(resolveVersion('ak-button', '0.x', reqMock)).to.eventually.equal('0.5.2')
+      expect(resolveVersion('ak-button', '0.x', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '0.5.2' }
+      )
     ));
 
     it('should handle caret ^ versions', () => (
-      expect(resolveVersion('ak-button', '^1.5.1', reqMock)).to.eventually.equal('1.6.0')
+      expect(resolveVersion('ak-button', '^1.5.1', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
+      )
     ));
 
     it('should handle tilde ~ versions', () => (
-      expect(resolveVersion('ak-button', '~1.5.1', reqMock)).to.eventually.equal('1.5.2')
+      expect(resolveVersion('ak-button', '~1.5.1', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.5.2' }
+      )
     ));
 
     it('should handle > versions', () => (
-      expect(resolveVersion('ak-button', '>1.3.3', reqMock)).to.eventually.equal('1.6.0')
+      expect(resolveVersion('ak-button', '>1.3.3', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
+      )
     ));
 
     it('should handle >= versions', () => (
-      expect(resolveVersion('ak-button', '>=1.3.3', reqMock)).to.eventually.equal('1.6.0')
+      expect(resolveVersion('ak-button', '>=1.3.3', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
+      )
     ));
 
     it('should handle < versions', () => (
-      expect(resolveVersion('ak-button', '<1.0.0', reqMock)).to.eventually.equal('0.5.2')
+      expect(resolveVersion('ak-button', '<1.0.0', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '0.5.2' }
+      )
     ));
 
     it('should handle <= versions', () => (
-      expect(resolveVersion('ak-button', '<=1.0.0', reqMock)).to.eventually.equal('1.0.0')
+      expect(resolveVersion('ak-button', '<=1.0.0', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-button', pkgVersion: '1.0.0' }
+      )
     ));
   });
 
@@ -82,9 +96,9 @@ describe('resolveVersion()', () => {
       },
     };
 
-    it('should reject promise for unknown component', () => (
-      expect(resolveVersion('ak-doesnt-exist', '0.x', reqMock)).to.eventually.be.rejectedWith(
-        'Error retrieving versions for ak-doesnt-exist'
+    it('should resolve promise with empty version for unknown component', () => (
+      expect(resolveVersion('ak-doesnt-exist', '0.x', reqMock)).to.eventually.deep.equal(
+        { pkgName: 'ak-doesnt-exist', pkgVersion: undefined }
       )
     ));
   });
