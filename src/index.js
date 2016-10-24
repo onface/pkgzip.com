@@ -37,6 +37,7 @@ app.get('/bundle.js', (req, res) => {
     // TODO test: http response content type is good for JS
     res.header('Content-Type', 'application/javascript');
     res.send(result);
+    return;
   })
   .catch((e) => {
     if (![ERR_EXPANSION_NEEDS_REDIRECT].includes(e.message)) {

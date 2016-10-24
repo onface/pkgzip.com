@@ -32,10 +32,13 @@ function doYarn(buildDir) {
 
 // entry fn
 function yarnInstall(packages) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     tmpDir().then(createPkgJsonFile.bind(null, packages)).then(doYarn).then((pkgJsonResults) => {
       const { buildDir } = pkgJsonResults;
-      resolve({ buildDir });
+      return resolve({ buildDir });
+    })
+    .catch((e) => {
+      reject(e);
     });
   });
 }
