@@ -6,7 +6,6 @@ DEPLOY_ENV=$2
 echo "== DEBUGGING =="
 node --version
 npm --version
-which micros
 echo "micros location: $(npm bin)/micros"
 printenv
 
