@@ -2,6 +2,8 @@ import deepEqual from 'lodash.isequal';
 import bundleFn from '../modules/bundle';
 import expandVersions from '../util/expand-versions';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from '../util/errors';
+import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from '../util/timer-keys';
+import log from '../util/logger';
 
 export default function (app) {
   app.get('/bundle(.min)?.js', (req, res) => {
@@ -10,6 +12,7 @@ export default function (app) {
       return;
     }
 
+    timeStart(TIMER_BUNDLE_REQUEST_DURATION);
     const pkgsParam = req.query.packages;
     const requestedPkgs = pkgsParam.split(',').map((pkgDef) => {
       const [pkgName, pkgVersion] = pkgDef.split('@');
@@ -25,20 +28,19 @@ export default function (app) {
       }
       const rebuiltPackages = expandedPackages.map(pkg => `${pkg.pkgName}@${pkg.pkgVersion}`).join(',');
       const redirEndpoint = buildFlags.minify ? 'bundle.min.js' : 'bundle.js';
+      log('Redirecting after expansion');
       res.redirect(`/${redirEndpoint}?packages=${rebuiltPackages}`);
       throw new Error(ERR_EXPANSION_NEEDS_REDIRECT);
     })
     .then(bundleFn.bind(null, buildFlags)).then((result) => {
-      // TODO test: 200 returned if promise resolves
-      // TODO test: http response body === resolve result
-      // TODO test: http response content type is good for JS
+      timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
       res.header('Content-Type', 'application/javascript');
       res.send(result);
       return;
     })
     .catch((e) => {
+      timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
       if (![ERR_EXPANSION_NEEDS_REDIRECT].includes(e.message)) {
-        // TODO test 500 returned if promise rejects
         res.status(500).send(e.toString());
       }
     });
