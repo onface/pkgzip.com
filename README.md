@@ -22,9 +22,9 @@ Package versions can be specified with the common [semver](http://semver.org) fo
 
 By default results are bundled but unminified. Use `bundle.min.js` to enable minification.
 
-### Caching
+### Compression and caching
 
-After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time.
+After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time. Results are GZIP encoded during transfer to the browser.
 
 ### Dev setup
 

@@ -45,6 +45,7 @@
   "dependencies": {
     "aws-sdk": "^2.6.12",
     "camelcase": "^3.0.0",
+    "compression": "^1.6.2",
     "express": "^4.14.0",
     "js-sha256": "^0.3.2",
     "lodash.isequal": "^4.4.0",
