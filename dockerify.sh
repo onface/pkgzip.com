@@ -2,6 +2,12 @@ set -e
 DEPLOY_MODE=$1
 DEPLOY_ENV=$2
 
+# debugging
+echo "== DEBUGGING =="
+node --version
+npm --version
+which micros
+echo "micros location: $(npm bin)/micros"
 printenv
 
 # bump npm version
