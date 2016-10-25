@@ -59,7 +59,7 @@ function download(filename) {
       Key: pathify(filename),
     }, (err, data) => {
       timeEnd(TIMER_S3_DOWNLOAD);
-      if (err) {
+      if (err || process.env.FROG_CACHE_DISABLED) {
         log(`No cache found for '${filename}'`);
         reject(err);
         return;

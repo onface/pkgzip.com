@@ -7,7 +7,10 @@
     "dev": "nodejs-dashboard babel-node -- src/index.js",
     "dev/watch": "nodemon --watch src --exec nodejs-dashboard babel-node -- src/index.js",
     "dev/inspect": "nodemon --watch src --exec nodejs-dashboard babel-node -- --inspect src/index.js",
+    "dev/uncached": "FROG_CACHE_DISABLED=1 babel-node src/index.js",
     "lint": "eslint src",
+    "load-test/cached": "artillery quick --duration 20 --rate 5 http://0.0.0.0:8080/bundle.js?packages=ak-button@1.0.0",
+    "load-test/uncached": "echo 'Please make sure env FROG_CACHE_DISABLED=1' && npm run load-test/cached",
     "test": "mocha --recursive --compilers js:babel-register",
     "dist": "npm run lint && npm test && babel src --out-dir dist",
     "start": "node dist/index.js",
@@ -50,6 +53,7 @@
     "webpack": "^1.13.2"
   },
   "devDependencies": {
+    "artillery": "^1.5.0-16",
     "babel-cli": "^6.11.4",
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-transform-regenerator": "^6.11.4",

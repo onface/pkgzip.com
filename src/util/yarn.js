@@ -21,9 +21,13 @@ function doYarn(buildDir) {
   return new Promise((resolve, reject) => {
     try {
       timeStart(TIMER_YARN_INSTALL_TOTAL);
-      childProc.execSync(`cd ${buildDir} && yarn`);
-      timeEnd(TIMER_YARN_INSTALL_TOTAL);
-      resolve({ buildDir });
+      childProc.exec(`cd ${buildDir} && yarn`, (err) => {
+        timeEnd(TIMER_YARN_INSTALL_TOTAL);
+        if (err) {
+          throw new Error(err);
+        }
+        resolve({ buildDir });
+      });
     } catch (e) {
       log('Yarn error', e);
       reject(e);
