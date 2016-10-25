@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:4
 
 COPY . /opt/service
 WORKDIR /opt/service
@@ -8,9 +8,6 @@ RUN npm install
 # install yarn
 RUN npm install --global yarn
 RUN yarn --version
-
-# rebuild npm to target os
-RUN npm rebuild
 
 # build app source to dist
 RUN npm run dist
