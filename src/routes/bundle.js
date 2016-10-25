@@ -8,7 +8,7 @@ import log from '../util/logger';
 export default function (app) {
   app.get('/bundle(.min)?.js', (req, res) => {
     if (!('packages' in req.query && req.query.packages.length)) {
-      res.send(500, 'Please supply a "packages" GET parameter.');
+      res.status(500).send('Please supply a "packages" GET parameter.');
       return;
     }
 
@@ -28,8 +28,9 @@ export default function (app) {
       }
       const rebuiltPackages = expandedPackages.map(pkg => `${pkg.pkgName}@${pkg.pkgVersion}`).join(',');
       const redirEndpoint = buildFlags.minify ? 'bundle.min.js' : 'bundle.js';
-      log('Redirecting after expansion');
-      res.redirect(`/${redirEndpoint}?packages=${rebuiltPackages}`);
+      const redirUrl = `/${redirEndpoint}?packages=${rebuiltPackages}`;
+      log(`Redirecting after expansion. ${redirUrl}`);
+      res.redirect(redirUrl);
       throw new Error(ERR_EXPANSION_NEEDS_REDIRECT);
     })
     .then(bundleFn.bind(null, buildFlags)).then((result) => {

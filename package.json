@@ -4,8 +4,10 @@
   "description": "Frogmarches your npm packages via webpack into a single JS file",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodejs-dashboard babel-node -- src/index.js",
-    "dev/watch": "nodemon --watch src --exec nodejs-dashboard babel-node -- src/index.js",
+    "dev": "babel-node src/index.js",
+    "dev/watch": "nodemon --watch src --exec babel-node -- src/index.js",
+    "dev/dashboard": "nodejs-dashboard babel-node -- src/index.js",
+    "dev/dashboard/watch": "nodemon --watch src --exec nodejs-dashboard babel-node -- src/index.js",
     "dev/inspect": "nodemon --watch src --exec nodejs-dashboard babel-node -- --inspect src/index.js",
     "dev/uncached": "FROG_CACHE_DISABLED=1 babel-node src/index.js",
     "lint": "eslint src",
