@@ -25,4 +25,4 @@ git commit -m "chore: updating service descriptor to v$NEW_VERSION"
 
 # publish to micros in fast mode
 sleep 10
-MICROS_TOKEN=$bamboo_MICROS_TOKEN_PASSWORD micros service:$DEPLOY_MODE frogmarch -f frogmarch.sd.yml -e $DEPLOY_ENV
+MICROS_TOKEN=$bamboo_MICROS_TOKEN_PASSWORD "$(npm bin)/micros" service:$DEPLOY_MODE frogmarch -f frogmarch.sd.yml -e $DEPLOY_ENV
