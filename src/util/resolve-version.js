@@ -1,5 +1,6 @@
 import request from 'request';
 import semver from 'semver';
+import log from './logger';
 
 function getVersions(pkgName) {
   return new Promise((resolve) => {
@@ -8,7 +9,7 @@ function getVersions(pkgName) {
       json: true,
     }, (err, resp, body) => {
       if (err || (body && !('versions' in body))) {
-        console.log(`Error retrieving versions for ${pkgName}`, err); // eslint-disable-line no-console
+        log(`Error retrieving versions for ${pkgName}`, err);
         resolve([]);
         return;
       }

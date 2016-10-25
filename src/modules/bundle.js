@@ -3,7 +3,8 @@ import fs from 'fs';
 import yarnInstall from '../util/yarn';
 import bundleHash from '../util/bundle-hash';
 import { upload, download } from '../util/s3';
-import { TIMER_WEBPACK_EXECUTION } from '../util/timer-keys';
+import { TIMER_WEBPACK_EXECUTION, timeStart, timeEnd } from '../util/timer-keys';
+import log from '../util/logger';
 
 import webpackGen from '../util/webpack';
 
@@ -16,7 +17,7 @@ const Bundle = (buildFlags = {}, requestedPkgs = []) => (
     download(cdnFilename).then((cdnBody) => {
       resolve(cdnBody); // maybe this block can be skipped
     }).catch((e) => {
-      console.log('bundling because not cached'); // eslint-disable-line no-console
+      log('bundling because not cached');
 
       yarnInstall(requestedPkgs).then((yarnResult) => {
         const { buildDir } = yarnResult;
@@ -26,9 +27,9 @@ const Bundle = (buildFlags = {}, requestedPkgs = []) => (
 
         const compiler = webpackGen({ buildDir, buildFlags });
 
-        console.time(TIMER_WEBPACK_EXECUTION); // eslint-disable-line no-console
+        timeStart(TIMER_WEBPACK_EXECUTION);
         compiler.run((err) => {
-          console.timeEnd(TIMER_WEBPACK_EXECUTION); // eslint-disable-line no-console
+          timeEnd(TIMER_WEBPACK_EXECUTION);
           if (err) throw new Error(err);
 
           const resultJs = fs.readFileSync(`${buildDir}/bundle.js`, 'utf8');
@@ -41,7 +42,7 @@ const Bundle = (buildFlags = {}, requestedPkgs = []) => (
           });
         });
       }).catch((err) => {
-        console.error(err, err.stack); // eslint-disable-line no-console
+        log({ err, stack: err.stack });
         throw new Error(e);
       });
     });

@@ -1,7 +1,8 @@
 import fs from 'fs';
 import childProc from 'child_process';
 import tmpDir from './tmp-dir';
-import { TIMER_YARN_INSTALL_TOTAL } from './timer-keys';
+import { TIMER_YARN_INSTALL_TOTAL, timeStart, timeEnd } from './timer-keys';
+import log from './logger';
 
 // create a package.json in the supplied dir
 function createPkgJsonFile(packages, buildDir) {
@@ -19,12 +20,12 @@ function createPkgJsonFile(packages, buildDir) {
 function doYarn(buildDir) {
   return new Promise((resolve, reject) => {
     try {
-      console.time(TIMER_YARN_INSTALL_TOTAL); // eslint-disable-line no-console
+      timeStart(TIMER_YARN_INSTALL_TOTAL);
       childProc.execSync(`cd ${buildDir} && yarn`);
-      console.timeEnd(TIMER_YARN_INSTALL_TOTAL); // eslint-disable-line no-console
+      timeEnd(TIMER_YARN_INSTALL_TOTAL);
       resolve({ buildDir });
     } catch (e) {
-      console.log('Yarn error', e); // eslint-disable-line no-console
+      log('Yarn error', e);
       reject(e);
     }
   });
