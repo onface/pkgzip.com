@@ -4,6 +4,7 @@ import expandVersions from '../util/expand-versions';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from '../util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from '../util/timer-keys';
 import log from '../util/logger';
+import rebuildUrl from '../util/rebuild-url';
 
 function doBundle(req, res, rawBuildFlags = {}) {
   if (!('packages' in req.query && req.query.packages.length)) {
@@ -26,9 +27,7 @@ function doBundle(req, res, rawBuildFlags = {}) {
     if (deepEqual(requestedPkgs, expandedPackages)) {
       return expandedPackages;
     }
-    const rebuiltPackages = expandedPackages.map(pkg => `${pkg.pkgName}@${pkg.pkgVersion}`).join(',');
-    const redirEndpoint = buildFlags.minify ? 'bundle.min.js' : 'bundle.js';
-    const redirUrl = `/${redirEndpoint}?packages=${rebuiltPackages}`;
+    const redirUrl = rebuildUrl(expandedPackages, buildFlags);
     log(`Redirecting after expansion. ${redirUrl}`);
     res.redirect(redirUrl);
     throw new Error(ERR_EXPANSION_NEEDS_REDIRECT);
