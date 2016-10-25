@@ -20,9 +20,9 @@ Package versions can be specified with the common [semver](http://semver.org) fo
 -  Tilde versions - `ak-navigation@~11.2.1`
 -  ..as well as `<1.x <=1.x >=1.x >1.x`
 
-By default results are bundled but unminified. Use `bundle.min.js` to enable minification.
-
 ### Compression and caching
+
+By default results are bundled but unminified. Use `bundle.min.js` to enable minification, or `bundle.dedupe.min.js` to enable deduplication + minification.
 
 After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time. Results are GZIP encoded during transfer to the browser.
 

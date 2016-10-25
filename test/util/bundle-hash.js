@@ -25,10 +25,10 @@ describe('hashBundle()', () => {
       { pkgName: 'package-two', pkgVersion: '0.0.2' },
     ], buildFlags);
 
-    expect(hashResultA).to.equal('032d2581264e0351bb6d9d784f637edbd1133c4cab87cfa636469df2d5f8a54f');
-    expect(hashResultB).to.equal('9766a4e8a97b523650ab8552d88cdbb4cd300bdc6a87ad41e1529e24bb77124c');
-    expect(hashResultC).to.equal('27388f5189eeeeb447087454975dbb15fd38c4a0683cd73fcac495f98f06b457');
-    expect(hashResultD).to.equal('cc16ac1a570685029e57603e41990357e96c78d05cb5e2ae88dc744cfe00d89d');
+    expect(hashResultA).to.equal('1ba247835242029bceb967a75b623cf8874822bc879da68543ffb7c66997b8dd');
+    expect(hashResultB).to.equal('38aad12ba9a7c1b6d783907d0a8fff8226f3c72cee0363a15391e81b86ddc077');
+    expect(hashResultC).to.equal('c5e5ea8eecb4641e5f93af3ec0a84789d03c7c8863bcab7502a03a3686890864');
+    expect(hashResultD).to.equal('6660a485e718b70240898adbfb0b97852832f9f5034a2b41771c4e4b1d9419b2');
 
     expect(hashResultA.length).to.equal(64); // length must be < 1024 for AWS S3 keys
   });
@@ -39,8 +39,8 @@ describe('hashBundle()', () => {
     const hashResultA = hashBundle(packages, { minify: false });
     const hashResultB = hashBundle(packages, { minify: true });
 
-    expect(hashResultA).to.equal('4f27c03f0c37f504964bd96ee4a3408a1eeefc79715a6615e29acc87bc3eebac');
-    expect(hashResultB).to.equal('032d2581264e0351bb6d9d784f637edbd1133c4cab87cfa636469df2d5f8a54f');
+    expect(hashResultA).to.equal('a821420c7c02f7c125c6d89e5a4ec2733df9d03a7e5efea39ebba2c126257998');
+    expect(hashResultB).to.equal('1ba247835242029bceb967a75b623cf8874822bc879da68543ffb7c66997b8dd');
 
     expect(hashResultA.length).to.equal(64); // length must be < 1024 for AWS S3 keys
   });

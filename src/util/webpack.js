@@ -19,6 +19,14 @@ export default function (opts) {
     );
   }
 
+  if (buildFlags.dedupe) {
+    selectedPlugins.push(
+      new webpack.optimize.DedupePlugin({
+        include: 'bundle.js',
+      })
+    );
+  }
+
   const compiler = webpack({
     context: buildDir,
     entry: './entry.js',
