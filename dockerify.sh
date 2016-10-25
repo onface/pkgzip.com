@@ -2,6 +2,8 @@ set -e
 DEPLOY_MODE=$1
 DEPLOY_ENV=$2
 
+printenv
+
 # bump npm version
 npm version patch
 NEW_VERSION=`node -e "console.log(require('./package.json').version);"`
