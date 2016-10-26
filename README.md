@@ -35,11 +35,7 @@ npm run dev
 
 ### Deploying to micros
 
-```bash
-npm run micros/publish-and-deploy/full # replaces the entire stack
-```
-
-If you want a faster but riskier update, replace `full` with `fast`.
+Changes to `master` are automatically tested and deployed via Bamboo.
 
 ### wtf frogmarch
 
