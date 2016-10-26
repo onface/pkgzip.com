@@ -1,20 +1,16 @@
 set -e
 DEPLOY_MODE=$1
 DEPLOY_ENV=$2
+MICROS_TOKEN=$bamboo_MICROS_TOKEN_PASSWORD
 
-# debugging
-echo "== DEBUGGING =="
-node --version
-npm --version
-echo "micros location: $(npm bin)/micros"
-printenv
+### NOTE: This is meant to be run via Bamboo.
+### The `sed` command below will fail on Mac.
 
-# bump npm version
-npm version patch
-NEW_VERSION=`node -e "console.log(require('./package.json').version);"`
+# bump version
+NEW_VERSION=`date +"1.0.0-%F-%H-%M-%S"`
 
 # work out new docker tag name
-IMG_NAME="docker.atlassian.io/bgummer/frogmarch"
+IMG_NAME="docker.atlassian.io/atlassian/frogmarch"
 NEW_IMAGE="$IMG_NAME:v$NEW_VERSION"
 echo "New version is $NEW_VERSION"
 
@@ -24,10 +20,7 @@ docker push "$NEW_IMAGE"
 
 # write new version to micros service descriptor
 sed -i "s/tag: .*/tag: v${NEW_VERSION}/" frogmarch.sd.yml
-rm -f frogmarch.sd.yml.bak
-git add frogmarch.sd.yml
-git commit -m "chore: updating service descriptor to v$NEW_VERSION"
 
 # publish to micros in fast mode
 sleep 10
-MICROS_TOKEN=$bamboo_MICROS_TOKEN_PASSWORD "$(npm bin)/micros" service:$DEPLOY_MODE frogmarch -f frogmarch.sd.yml -e $DEPLOY_ENV
+MICROS_TOKEN=$MICROS_TOKEN "$(npm bin)/micros" service:$DEPLOY_MODE frogmarch -f frogmarch.sd.yml -e $DEPLOY_ENV
