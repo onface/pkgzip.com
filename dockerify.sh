@@ -3,6 +3,9 @@ DEPLOY_MODE=$1
 DEPLOY_ENV=$2
 MICROS_TOKEN=$bamboo_MICROS_TOKEN_PASSWORD
 
+MICROS_TOKEN_LEN=${#MICROS_TOKEN}
+echo "Length of Micros token: $MICROS_TOKEN_LEN"
+
 ### NOTE: This is meant to be run via Bamboo.
 ### The `sed` command below will fail on Mac.
 
