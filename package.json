@@ -17,6 +17,7 @@
     "dist": "npm run lint && npm test && babel src --out-dir dist",
     "start": "node dist/index.js",
     "nanos": "nanos service:deploy myservicename -f frogmarch.sd.yml -v --foreground -t 20000",
+    "bamboo": "bamboo_MICROS_TOKEN_PASSWORD=$bamboo_MICROS_TOKEN_PASSWORD bash dockerify.sh deploy adev",
     "micros/publish-and-deploy/full": "npm run dist && bash dockerify.sh deploy adev",
     "micros/publish-and-deploy/fast": "npm run dist && bash dockerify.sh update adev",
     "micros/publish-and-deploy/PROD": "npm run dist && bash dockerify.sh update production",
