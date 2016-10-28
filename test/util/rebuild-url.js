@@ -36,13 +36,13 @@ describe('rebuildUrl()', () => {
     expect(rebuildUrl(packages, {})).to.equal('/bundle.js?packages=ak-button,ak-icon@1.x');
   });
 
-  it('should sort packages by name alphabetically', () => {
+  it('should preserve package order', () => {
     const packages = [
       { pkgName: 'ak-zephyr', pkgVersion: 'latest' },
       { pkgName: 'ak-icon', pkgVersion: '1.x' },
       { pkgName: 'ak-button', pkgVersion: 'latest' },
     ];
-    expect(rebuildUrl(packages, {})).to.equal('/bundle.js?packages=ak-button,ak-icon@1.x,ak-zephyr');
+    expect(rebuildUrl(packages, {})).to.equal('/bundle.js?packages=ak-zephyr,ak-icon@1.x,ak-button');
   });
 
   it('should remove @latest from package if latest supplied', () => {
