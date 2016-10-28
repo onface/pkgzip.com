@@ -5,3 +5,5 @@ temp
 
 npm-debug.log
 artillery_report*
+.serverless
+frogmarch/package.json

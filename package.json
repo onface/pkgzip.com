@@ -11,10 +11,13 @@
     "dev/dashboard/watch": "nodemon --watch src --exec nodejs-dashboard babel-node -- src/index.js",
     "dev/inspect": "nodemon --watch src --exec nodejs-dashboard babel-node -- --inspect src/index.js",
     "dev/uncached": "FROG_CACHE_DISABLED=1 babel-node src/index.js",
-    "dist": "npm run lint && npm test && babel src --out-dir dist",
+    "dist": "babel src --out-dir dist",
+    "dist/lambda": "babel src --out-dir frogmarch/dist",
+    "dist/webpack": "npm run lint && webpack",
     "lint": "eslint src test",
     "load-test/cached": "artillery quick --duration 20 --rate 5 http://0.0.0.0:8080/bundle.js?packages=ak-button@1.0.0",
     "load-test/uncached": "echo 'Please make sure env FROG_CACHE_DISABLED=1' && npm run load-test/cached",
+    "lambda": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY ./lambdaify.sh",
     "start": "node dist/index.js",
     "test": "mocha --recursive --compilers js:babel-register",
     "test/watch": "npm run test -- -w"
@@ -56,6 +59,7 @@
   "devDependencies": {
     "artillery": "^1.5.0-16",
     "babel-cli": "^6.11.4",
+    "babel-loader": "^6.2.7",
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-transform-regenerator": "^6.11.4",
     "babel-polyfill": "^6.13.0",
@@ -69,10 +73,13 @@
     "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-react": "^6.1.1",
+    "json-loader": "^0.5.4",
     "mocha": "^3.0.2",
     "nodejs-dashboard": "^0.1.2",
     "pre-commit": "^1.1.3",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.6"
+    "serverless": "^1.0.3",
+    "sinon": "^1.17.6",
+    "webpack": "^1.13.3"
   }
 }
