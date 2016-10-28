@@ -2,12 +2,6 @@ function testAlwaysTrueIf(alwaysTrueIf, buildFlags) {
   return alwaysTrueIf && alwaysTrueIf.some(flg => !!buildFlags[flg]);
 }
 
-function sortByPkgName(a, b) {
-  if (a.pkgName < b.pkgName) return -1;
-  if (a.pkgName > b.pkgName) return 1;
-  return 0;
-}
-
 function combinePkgNameAndVer(pkg) {
   const { pkgName, pkgVersion } = pkg;
   if (pkgVersion && pkgVersion !== 'latest') {
@@ -27,7 +21,7 @@ function rebuildUrl(expandedPackages, buildFlags) {
     if (buildFlags[internal] || testAlwaysTrueIf(alwaysTrueIf, buildFlags)) selectedFlags.push(`.${url}`);
   });
 
-  const rebuiltPackages = expandedPackages.sort(sortByPkgName).map(combinePkgNameAndVer).join(',');
+  const rebuiltPackages = expandedPackages.map(combinePkgNameAndVer).join(',');
   const redirEndpoint = `bundle${selectedFlags.join('')}.js`;
   return `/${redirEndpoint}?packages=${rebuiltPackages}`;
 }
