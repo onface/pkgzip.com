@@ -1,21 +1,29 @@
-const bundleFn = require('./dist/modules/lambda.js');
+'use strict';
 
-module.exports.hello = (event, context, callback) => {
+var _lambda = require('./dist/modules/lambda');
+
+var _lambda2 = _interopRequireDefault(_lambda);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports.hello = function (event, context, callback) {
+  // const packagesQuery = event.queryStringParameters.packages;
   function respond(message) {
-    const response = {
+    var response = {
       statusCode: 200,
       body: JSON.stringify({
-        message,
-        input: event,
-      }),
+        message: message,
+        input: event
+      })
     };
 
     callback(null, response);
   }
 
-  bundleFn({}, [{ pkgName: 'ak-button', pkgVersion: '1.0.0' }]).then((result) => {
+  // respond('IT WORKED!');
+  (0, _lambda2.default)({}, [{ pkgName: 'ak-button', pkgVersion: '1.0.0' }]).then(function (result) {
     respond(result);
-  }).catch((err) => {
+  }).catch(function (err) {
     respond(err);
   });
 

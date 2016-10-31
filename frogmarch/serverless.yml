@@ -15,6 +15,8 @@ service: frogmarch
 
 provider:
   name: aws
+  stage: dev
+  region: ap-southeast-2
   runtime: nodejs4.3
 
 # you can overwrite defaults here
@@ -47,6 +49,10 @@ functions:
     handler: handler.hello
     timeout: 30
     memory: 256
+    events:
+      - http:
+          path: hello
+          method: get
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -71,3 +77,6 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+plugins:
+  - serverless-run-function-plugin

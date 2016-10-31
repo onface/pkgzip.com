@@ -4312,6 +4312,10 @@ serverless:
     traverse "^0.6.6"
     uuid "^2.0.2"
 
+serverless-run-function-plugin:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/serverless-run-function-plugin/-/serverless-run-function-plugin-0.0.4.tgz#3bd68bb43e7b0f50db40294424c96ee255efc5ff"
+
 set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"

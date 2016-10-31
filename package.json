@@ -12,12 +12,13 @@
     "dev/inspect": "nodemon --watch src --exec nodejs-dashboard babel-node -- --inspect src/index.js",
     "dev/uncached": "FROG_CACHE_DISABLED=1 babel-node src/index.js",
     "dist": "babel src --out-dir dist",
-    "dist/lambda": "babel src --out-dir frogmarch/dist",
+    "dist/lambda": "babel src --out-dir frogmarch/dist && babel frogmarch/handler.src.js --out-file frogmarch/handler.js",
     "dist/webpack": "npm run lint && webpack",
     "lint": "eslint src test",
     "load-test/cached": "artillery quick --duration 20 --rate 5 http://0.0.0.0:8080/bundle.js?packages=ak-button@1.0.0",
     "load-test/uncached": "echo 'Please make sure env FROG_CACHE_DISABLED=1' && npm run load-test/cached",
     "lambda": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY ./lambdaify.sh",
+    "lambda/run": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY ./lambda-run.sh",
     "start": "node dist/index.js",
     "test": "mocha --recursive --compilers js:babel-register",
     "test/watch": "npm run test -- -w"
@@ -53,6 +54,7 @@
     "nodemon": "^1.11.0",
     "request": "^2.75.0",
     "semver": "^5.3.0",
+    "serverless-run-function-plugin": "^0.0.4",
     "tmp": "0.0.29",
     "webpack": "^1.13.2"
   },

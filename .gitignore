@@ -7,3 +7,5 @@ npm-debug.log
 artillery_report*
 .serverless
 frogmarch/package.json
+
+serverless-run-function-plugin
