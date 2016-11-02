@@ -3,28 +3,16 @@ import { TIMER_S3_UPLOAD, TIMER_S3_DOWNLOAD, timeStart, timeEnd } from './timer-
 import log from './logger';
 
 // first option is micros, second option is fallback
-const S3_BUCKET = process.env.S3_CACHE_BUCKET_NAME || process.env.FROG_S3_CACHE_BUCKET_NAME;
-const S3_REGION = process.env.S3_CACHE_BUCKET_REGION || process.env.FROG_S3_CACHE_BUCKET_REGION;
+const S3_BUCKET = 'morty-dev-jscache-fktj6ok81p5z'; // process.env.S3_CACHE_BUCKET_NAME || process.env.FROG_S3_CACHE_BUCKET_NAME;
+const S3_REGION = 'ap-southeast-2'; // process.env.S3_CACHE_BUCKET_REGION || process.env.FROG_S3_CACHE_BUCKET_REGION;
 const S3_BUCKET_PATH = process.env.S3_CACHE_BUCKET_PATH || '';
-const ACCESS_KEY_ID = process.env.ACCESS_KEY_ID || process.env.FROG_ACCESS_KEY_ID;
-const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY || process.env.FROG_SECRET_ACCESS_KEY;
-
-// Micros auto-authenticates with S3 so only need to pass auth locally
-function s3Config() {
-  return process.env.S3_CACHE_BUCKET_NAME
-    ? {
-      region: S3_REGION,
-    }
-    : {
-      accessKeyId: ACCESS_KEY_ID,
-      secretAccessKey: SECRET_ACCESS_KEY,
-      region: S3_REGION,
-    };
-}
+// const ACCESS_KEY_ID = process.env.ACCESS_KEY_ID || process.env.FROG_ACCESS_KEY_ID;
+// const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY || process.env.FROG_SECRET_ACCESS_KEY;
 
 function newS3() {
-  const config = s3Config();
-  return new AWS.S3(config);
+  return new AWS.S3({
+    region: S3_REGION,
+  });
 }
 
 function pathify(filename) {

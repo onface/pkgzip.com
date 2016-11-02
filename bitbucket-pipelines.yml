@@ -4,5 +4,9 @@ pipelines:
   default:
     - step:
         script:
-          - npm install
-          - npm run dist # runs lint + test as well
+          - npm install -g yarn
+          - yarn
+          - npm run lint
+          - npm run test
+          - npm run dist
+          # - npm run deploy

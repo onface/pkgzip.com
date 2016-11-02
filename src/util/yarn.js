@@ -1,3 +1,4 @@
+import path from 'path';
 import fs from 'fs';
 import childProc from 'child_process';
 import tmpDir from './tmp-dir';
@@ -6,22 +7,29 @@ import log from './logger';
 
 // create a package.json in the supplied dir
 function createPkgJsonFile(packages, buildDir) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const pkgJsonFile = `${buildDir}/package.json`;
     const pkgJsonSource = { license: 'ISC', dependencies: {} };
     packages.forEach((pkg) => { pkgJsonSource.dependencies[pkg.pkgName] = pkg.pkgVersion; });
 
-    fs.writeFileSync(pkgJsonFile, JSON.stringify(pkgJsonSource));
-    resolve(buildDir);
+    fs.writeFile(pkgJsonFile, JSON.stringify(pkgJsonSource), (err) => {
+      if (err) {
+        log(err);
+        reject(err);
+        return;
+      }
+      resolve(buildDir);
+    });
   });
 }
 
 // executes `yarn`
 function doYarn(buildDir) {
+  const yarnBin = path.resolve('./node_modules/yarn/bin/yarn');
   return new Promise((resolve, reject) => {
     try {
       timeStart(TIMER_YARN_INSTALL_TOTAL);
-      childProc.exec(`cd ${buildDir} && yarn`, (err) => {
+      childProc.exec(yarnBin, { cwd: buildDir }, (err) => {
         timeEnd(TIMER_YARN_INSTALL_TOTAL);
         if (err) {
           throw new Error(err);
