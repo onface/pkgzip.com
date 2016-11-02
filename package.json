@@ -7,9 +7,10 @@
     "bamboo/staging": "FROG_AWS_ACCESS_KEY_ID=$bamboo_AWS_ACCESS_KEY_PASSWORD FROG_AWS_SECRET_ACCESS_KEY=$bamboo_AWS_SECRET_ACCESS_KEY_PASSWORD npm run deploy",
     "deploy": "docker build --build-arg AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID --build-arg AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY --no-cache -t lambda .",
     "dist": "webpack",
+    "integration-test": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY ./integration-test.sh",
     "lint": "eslint src test",
     "logs": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY serverless logs -f bundle -t",
-    "lambda/offline": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls offline --noTimeout",
+    "offline": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls offline --noTimeout",
     "sls": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls",
     "test": "mocha --recursive --compilers js:babel-register",
     "test/watch": "npm run test -- -w"
