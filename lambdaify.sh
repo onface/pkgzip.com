@@ -23,6 +23,7 @@ cd ..
 sleep 2
 npm run lint
 npm run test
+AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" npm run integration-test
 
 # build app into morty dir
 npm run dist
