@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-`npm bin`/sls offline --dontPrintOutput --noTimeout --stage=dev&
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY `npm bin`/sls offline --dontPrintOutput --noTimeout --stage=dev&
 
 sleep 2
 
