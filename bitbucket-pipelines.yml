@@ -1,4 +1,4 @@
-image: node:6
+image: node:4.3
 
 pipelines:
   default:
@@ -9,4 +9,4 @@ pipelines:
           - npm run lint
           - npm run test
           - npm run dist
-          - npm run integration-test
+          - FROG_AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID FROG_AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY npm run integration-test
