@@ -1,27 +1,60 @@
-import express from 'express';
-import compression from 'compression';
-import morgan from 'morgan';
-import healthcheckRoute from './routes/healthcheck';
-import bundleRoute from './routes/bundle';
-import log from './util/logger';
+import deepEqual from 'lodash.isequal';
+import bundleFn from './modules/lambda';
+import expandVersions from './util/expand-versions';
+import rebuildUrl from './util/rebuild-url';
+import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 
-const app = express();
+module.exports.bundle = (event, context, callback) => {
+  console.log(JSON.stringify(process.env)); // eslint-disable-line no-console
+  function respond(statusCode = 200, message) {
+    const headers = statusCode === 302
+      ? { Location: message }
+      : { 'Content-Type': 'application/javascript' };
 
-// Serve static files from ./public/
-app.use(express.static('public'));
+    const response = {
+      statusCode,
+      headers,
+      body: message,
+    };
+    callback(null, response);
+  }
 
-// Log status codes and URLs
-app.use(morgan('EXPRESS method=:method status=:status resptime=:response-time url=:url'));
+  const params = Object.assign({
+    packages: '',
+    flags: '',
+  }, event.queryStringParameters);
 
-// compress all responses
-app.use(compression());
+  const pkgsParam = params.packages;
+  const requestedPkgs = pkgsParam.split(',').map((pkgDef) => {
+    const [pkgName, pkgVersion] = pkgDef.split('@');
+    return pkgName ? { pkgName, pkgVersion } : null;
+  }).filter(p => !!p);
 
-// Set up routes
-healthcheckRoute(app);
-bundleRoute(app);
+  if (!requestedPkgs.length) {
+    respond(500, 'Please supply at least 1 npm package name in the packages parameter');
+    return;
+  }
 
-// Start the server
-const port = 8080;
-app.listen(port, () => {
-  log(`Example app listening at http://0.0.0.0:${port} :)`);
-});
+  const rawBuildFlags = params.flags.split(',');
+  const buildFlags = {
+    minify: rawBuildFlags.includes('minify'),
+    dedupe: rawBuildFlags.includes('dedupe'),
+  };
+
+  expandVersions(requestedPkgs).then((expandedPackages) => {
+    if (deepEqual(requestedPkgs, expandedPackages)) {
+      return expandedPackages;
+    }
+    const redirUrl = rebuildUrl(expandedPackages, buildFlags);
+    respond(302, redirUrl);
+    throw new Error(ERR_EXPANSION_NEEDS_REDIRECT);
+  })
+  .then(bundleFn.bind(null, buildFlags)).then((result) => {
+    respond(200, result);
+  })
+  .catch((err) => {
+    if (![ERR_EXPANSION_NEEDS_REDIRECT].includes(err.message)) {
+      respond(500, err);
+    }
+  });
+};

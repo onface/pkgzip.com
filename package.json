@@ -37,8 +37,6 @@
   "dependencies": {
     "aws-sdk": "^2.6.13",
     "camelcase": "^3.0.0",
-    "compression": "^1.6.2",
-    "express": "^4.14.0",
     "js-sha256": "^0.3.2",
     "lodash.isequal": "^4.4.0",
     "morgan": "^1.7.0",
@@ -46,7 +44,7 @@
     "semver": "^5.3.0",
     "tmp": "0.0.30",
     "webpack": "^1.13.3",
-    "yarn": "^0.16.1",
+    "yarn": "bengummer/yarn#lambda-fix",
     "serverless": "serverless/serverless#master"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: ['./src/lambda-index.js'],
+  entry: ['./src/index.js'],
   output: {
     path: __dirname,
     filename: 'handler.js',
