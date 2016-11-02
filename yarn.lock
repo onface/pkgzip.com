@@ -238,9 +238,22 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-sdk@^2.3.17, aws-sdk@^2.6.12:
+aws-sdk@^2.3.17:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.6.12.tgz#37f192502888bb5c01a2819eebc766ebeaf4e418"
+  dependencies:
+    buffer "4.9.1"
+    crypto-browserify "1.0.9"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.1.5"
+    url "0.10.3"
+    xml2js "0.4.15"
+    xmlbuilder "2.6.2"
+
+aws-sdk@^2.6.13:
+  version "2.6.13"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.6.13.tgz#14860439ce40497e4b08cfd363d76777967dbaef"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -1716,12 +1729,12 @@ eslint-plugin-mocha@^4.7.0:
   dependencies:
     ramda "^0.22.1"
 
-eslint-plugin-react@^6.1.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.4.1.tgz#7d1aade747db15892f71eee1fea4addf97bcfa2b"
+eslint-plugin-react@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.5.0.tgz#93f894b6469974304609e59c8983a6a3dc81738c"
   dependencies:
     doctrine "^1.2.2"
-    jsx-ast-utils "^1.3.1"
+    jsx-ast-utils "^1.3.3"
 
 eslint-plugin-react@5.2.2:
   version "5.2.2"
@@ -1941,6 +1954,10 @@ filenamify@^1.2.1:
     strip-outer "^1.0.0"
     trim-repeated "^1.0.0"
 
+filesize@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-3.3.0.tgz#53149ea3460e3b2e024962a51648aa572cf98122"
+
 fill-keys@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/fill-keys/-/fill-keys-1.0.2.tgz#9a8fa36f4e8ad634e3bf6b4f3c8882551452eb20"
@@ -2141,6 +2158,13 @@ gl-matrix@^2.1.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-2.3.2.tgz#aac808c74af7d5db05fe04cb60ca1a0fcb174d74"
 
+glob-all@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/glob-all/-/glob-all-3.1.0.tgz#8913ddfb5ee1ac7812656241b03d5217c64b02ab"
+  dependencies:
+    glob "^7.0.5"
+    yargs "~1.2.6"
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -2164,7 +2188,7 @@ glob@^5.0.5:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.0.6:
+glob@^7.0.0, glob@^7.0.3, glob@^7.0.5:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
   dependencies:
@@ -2773,7 +2797,7 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.3.6"
 
-jsx-ast-utils@^1.0.0, jsx-ast-utils@^1.2.1, jsx-ast-utils@^1.3.1:
+jsx-ast-utils@^1.0.0, jsx-ast-utils@^1.2.1, jsx-ast-utils@^1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.3.3.tgz#ccfdbe0320ba03f7a1fc4e67ceaf7e2cc0169721"
   dependencies:
@@ -3072,6 +3096,10 @@ minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.3, "minimatch@2 || 3":
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.3.tgz#2a4e4090b96b2db06a9d7df01055a62a77c9b774"
   dependencies:
     brace-expansion "^1.0.0"
+
+minimist@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.1.0.tgz#99df657a52574c21c9057497df742790b2b4c0de"
 
 minimist@^1.1.0, minimist@^1.2.0:
   version "1.2.0"
@@ -4493,9 +4521,9 @@ timers-browserify@^1.0.1:
   dependencies:
     process "~0.11.0"
 
-tmp@0.0.29:
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.29.tgz#f25125ff0dd9da3ccb0c2dd371ee1288bb9128c0"
+tmp@0.0.30:
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.30.tgz#72419d4a8be7d6ce75148fd8b324e593a711c2ed"
   dependencies:
     os-tmpdir "~1.0.1"
 
@@ -4866,6 +4894,12 @@ xtend@^4.0.0:
 yallist@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.0.tgz#306c543835f09ee1a4cb23b7bce9ab341c91cdd4"
+
+yargs@~1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-1.2.6.tgz#9c7b4a82fd5d595b2bf17ab6dcc43135432fe34b"
+  dependencies:
+    minimist "^0.1.0"
 
 yargs@~3.10.0:
   version "3.10.0"
