@@ -12,8 +12,7 @@ provider:
         - 's3:GetObject'
         - 's3:PutObject'
         - 's3:PutObjectAcl'
-      Resource: "*"
-  # iamRoleARN: arn:aws:iam::906656485021:role/morty-full-admin
+      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "jscache" } ] ]  }
 
 functions:
   bundle:
