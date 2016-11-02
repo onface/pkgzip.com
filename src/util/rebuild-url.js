@@ -24,8 +24,8 @@ function rebuildUrl(expandedPackages, buildFlags) {
   });
 
   const rebuiltPackages = expandedPackages.map(combinePkgNameAndVer).join(',');
-  const redirEndpoint = `bundle${selectedFlags.join('')}.js`;
-  return `/${redirEndpoint}?packages=${rebuiltPackages}`;
+  const flagsParam = selectedFlags.length ? `&flags=${selectedFlags.join(',')}` : '';
+  return `/dev/bundle.js?packages=${rebuiltPackages}${flagsParam}`;
 }
 
 export default rebuildUrl;

@@ -42,7 +42,7 @@ describe('rebuildUrl()', () => {
       { pkgName: 'ak-icon', pkgVersion: '1.x' },
       { pkgName: 'ak-button', pkgVersion: 'latest' },
     ];
-    expect(rebuildUrl(packages, {})).to.equal('/bundle.js?packages=ak-zephyr,ak-icon@1.x,ak-button');
+    expect(rebuildUrl(packages, {})).to.equal('/dev/bundle.js?packages=ak-zephyr,ak-icon@1.x,ak-button');
   });
 
   it('should remove @latest from package if latest supplied', () => {
