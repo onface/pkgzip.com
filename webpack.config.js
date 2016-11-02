@@ -1,10 +1,14 @@
-// const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: ['./src/index.js'],
+  entry: ['./src/lambda-index.js'],
   output: {
     path: __dirname,
-    filename: 'dist/bundle.js',
+    filename: 'handler.js',
+    libraryTarget: 'umd',
+    library: 'morty',
   },
   module: {
     preLoaders: [
@@ -20,13 +24,8 @@ module.exports = {
     ],
   },
   target: 'node',
+  externals: ['aws-sdk', nodeExternals()],
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin(),
-    // new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.DedupePlugin(),
   ],
-  // node: {
-  //   fs: 'empty',
-  //   child_process: 'empty',
-  //   net: 'empty',
-  // },
 };

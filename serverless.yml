@@ -1,0 +1,34 @@
+service: morty
+
+provider:
+  name: aws
+  stage: dev
+  region: ap-southeast-2
+  runtime: nodejs4.3
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+        - 's3:GetObject'
+        - 's3:PutObject'
+        - 's3:PutObjectAcl'
+      Resource: "*"
+  # iamRoleARN: arn:aws:iam::906656485021:role/morty-full-admin
+
+functions:
+  bundle:
+    handler: handler.bundle
+    timeout: 60
+    memory: 256
+    events:
+      - http:
+          path: bundle.js
+          method: get
+
+resources:
+  Resources:
+    jscache:
+      Type: AWS::S3::Bucket
+
+plugins:
+  - serverless-offline

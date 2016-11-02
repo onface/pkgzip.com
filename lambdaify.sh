@@ -1,14 +1,33 @@
-serverless --version
-rm -rf frogmarch/dist/
-rm -rf frogmarch/.serverless
-rm -rf frogmarch/node_modules
-rm -f frogmarch/yarn.lock
-npm run dist/lambda
-cp package.json frogmarch/
-cd frogmarch
-yarn install --production
-rm yarn.lock
+# fix docker missing pkgs
+npm install glob-all filesize
+
+SLS="`npm bin`/serverless"
+$SLS --version
+
+# set up lambda function dir
+mkdir morty
+cp serverless.yml morty/
+
+# copy node_modules into morty dir
+cp package.json morty/
+cp yarn.lock morty/
+cd morty
+
+# npm install --production # yarn
+yarn
+
+npm install bengummer/yarn#lambda-fix --force --legacy-bundling
+npm install mkdirp glob-all filesize # needed on lambda for some reason
 sleep 2
-AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY serverless deploy
-# AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY serverless invoke --function hello
+
+cd ..
+
+# build app into morty dir
+npm run dist/lambda
+cp handler.js morty/
+
+cd morty
+
+SLS_DEBUG=1 AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" $SLS deploy --verbose
+# AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY $SLS invoke --function hello
 cd ..

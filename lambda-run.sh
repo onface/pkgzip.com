@@ -1,8 +1,8 @@
-serverless --version
-# rm -rf frogmarch/dist/
+SLS="`npm bin`/serverless"
+$SLS --version
 npm run dist/lambda
-cp package.json frogmarch/
-cd frogmarch
-yarn install --production
-SLS_DEBUG=1 serverless run -f hello
+cp package.json morty/
+cd morty
+# yarn install --production
+SLS_DEBUG=1 $SLS offline
 cd ..

@@ -1,13 +1,11 @@
-# frogmarch
+# morty
 
-Frogmarches your npm packages via webpack into a single JS file.
-
-Currently in testing, will be deployed to micros soon. Ideal for Connect developers to consume AtlasKit components.
+Bundles your npm packages via webpack into a single JS file. Runs on AWS lambda.
 
 ### Usage
 
 ```html
-<script src="https://frogmarch.internal.app.dev.atlassian.io/bundle.js?packages=ak-navigation@11.2.1,ak-button"></script>
+<script src="https://eovrzrbij2.execute-api.ap-southeast-2.amazonaws.com/dev/bundle.js?packages=ak-navigation@latest,ak-icon@8.x&flags=minify,dedupe"></script>
 ```
 
 ### API
@@ -22,21 +20,12 @@ Package versions can be specified with the common [semver](http://semver.org) fo
 
 ### Compression and caching
 
-By default results are bundled but unminified. Use `bundle.min.js` to enable minification, or `bundle.dedupe.min.js` to enable deduplication + minification.
+By default results are unminified. The `flags=minify` or `flags=minify,dedupe` parameter can be to trigger minification + deduplication.
 
 After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time. Results are GZIP encoded during transfer to the browser.
 
-### Dev setup
-
-```bash
-yarn # or `npm install`
-npm run dev
-```
-
-### Deploying to micros
+### Deploying to Lambda
 
 Changes to `master` are automatically tested and deployed via Bamboo.
 
-### wtf frogmarch
-
-![Frogmarching a frog](https://bitbucket.org/repo/qbqoG9/images/3560229856-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)
+![Morty](https://bitbucket.org/repo/qbqoG9/images/3560229856-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)

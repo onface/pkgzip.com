@@ -1,17 +1,13 @@
-FROM node:6
+FROM node:4.5
+
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
 
 COPY . /opt/service
 WORKDIR /opt/service
 
-RUN npm install
+RUN npm --version
+RUN npm install -g yarn && yarn
+# RUN npm i
 
-# install yarn
-RUN npm install --global yarn
-RUN yarn --version
-
-# build app source to dist
-RUN npm run dist
-
-EXPOSE 8080
-
-CMD npm start
+RUN ./lambdaify.sh

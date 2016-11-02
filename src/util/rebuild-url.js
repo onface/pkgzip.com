@@ -19,17 +19,19 @@ function combinePkgNameAndVer(pkg) {
 function rebuildUrl(expandedPackages, buildFlags) {
   const selectedFlags = [];
   const allowedFlags = [
-    { internal: 'dedupe', url: 'dedupe' },
-    { internal: 'minify', url: 'min', alwaysTrueIf: ['dedupe'] },
+    { flag: 'dedupe' },
+    { flag: 'minify', alwaysTrueIf: ['dedupe'] },
   ];
   allowedFlags.forEach((flagSet) => {
-    const { internal, url, alwaysTrueIf } = flagSet;
-    if (buildFlags[internal] || testAlwaysTrueIf(alwaysTrueIf, buildFlags)) selectedFlags.push(`.${url}`);
+    const { flag, alwaysTrueIf } = flagSet;
+    if (buildFlags[flag] || testAlwaysTrueIf(alwaysTrueIf, buildFlags)) {
+      selectedFlags.push(flag);
+    }
   });
 
   const rebuiltPackages = expandedPackages.sort(sortByPkgName).map(combinePkgNameAndVer).join(',');
-  const redirEndpoint = `bundle${selectedFlags.join('')}.js`;
-  return `/${redirEndpoint}?packages=${rebuiltPackages}`;
+  const flagsParam = selectedFlags.length ? `&flags=${selectedFlags.join(',')}` : '';
+  return `/dev/bundle.js?packages=${rebuiltPackages}${flagsParam}`;
 }
 
 export default rebuildUrl;
