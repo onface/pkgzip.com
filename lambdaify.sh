@@ -23,7 +23,7 @@ sleep 2
 cd ..
 
 # build app into morty dir
-npm run dist/lambda
+npm run dist
 cp handler.js morty/
 
 cd morty
