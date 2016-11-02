@@ -28,7 +28,7 @@ npm run test
 npm run dist
 
 # run integration-test
-AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" npm run integration-test
+FROG_AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" FROG_AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" npm run integration-test
 
 # copy app into morty dir and deploy
 cp handler.js morty/
