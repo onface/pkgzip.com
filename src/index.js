@@ -1,12 +1,13 @@
 import deepEqual from 'lodash.isequal';
-import bundleFn from './modules/lambda';
+import bundleFn from './modules/bundle';
 import expandVersions from './util/expand-versions';
 import rebuildUrl from './util/rebuild-url';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
+import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
 
 module.exports.bundle = (event, context, callback) => {
-  console.log(JSON.stringify(process.env)); // eslint-disable-line no-console
   function respond(statusCode = 200, message) {
+    timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
     const headers = statusCode === 302
       ? { Location: message }
       : { 'Content-Type': 'application/javascript' };
@@ -18,6 +19,8 @@ module.exports.bundle = (event, context, callback) => {
     };
     callback(null, response);
   }
+
+  timeStart(TIMER_BUNDLE_REQUEST_DURATION);
 
   const params = Object.assign({
     packages: '',
