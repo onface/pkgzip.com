@@ -23,12 +23,15 @@ cd ..
 sleep 2
 npm run lint
 npm run test
+
+# build app
+npm run dist
+
+# run integration-test
 AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" npm run integration-test
 
-# build app into morty dir
-npm run dist
+# copy app into morty dir and deploy
 cp handler.js morty/
-
 cd morty
 SLS_DEBUG=1 AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" $SLS deploy --verbose
 cd ..
