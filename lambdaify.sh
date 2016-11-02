@@ -22,6 +22,9 @@ sleep 2
 
 cd ..
 
+npm run lint
+npm run test
+
 # build app into morty dir
 npm run dist
 cp handler.js morty/
