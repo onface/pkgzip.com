@@ -46,7 +46,7 @@
     "tmp": "0.0.30",
     "webpack": "^1.13.3",
     "yarn": "bengummer/yarn#lambda-fix",
-    "serverless": "serverless/serverless#master"
+    "serverless": "1.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
