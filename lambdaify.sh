@@ -1,5 +1,5 @@
 # fix docker missing pkgs
-# npm install glob-all filesize
+npm install glob-all filesize
 
 SLS="`npm bin`/serverless"
 $SLS --version
@@ -14,7 +14,7 @@ cp yarn.lock morty/
 
 # install node_moedules in morty dir
 cd morty
-yarn install --production
+yarn
 npm install bengummer/yarn#lambda-fix --force --legacy-bundling
 npm install mkdirp glob-all filesize # needed on lambda for some reason
 cd ..
