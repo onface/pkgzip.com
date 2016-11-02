@@ -2,6 +2,9 @@
 set -e
 
 yarn
+
+sleep 2
+
 `npm bin`/sls offline --dontPrintOutput --noTimeout --stage=dev&
 
 sleep 2
