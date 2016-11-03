@@ -4,6 +4,7 @@ import expandVersions from './util/expand-versions';
 import rebuildUrl from './util/rebuild-url';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
+import log from './util/logger';
 
 module.exports.bundle = (event, context, callback) => {
   function respond(statusCode = 200, message) {
@@ -21,6 +22,8 @@ module.exports.bundle = (event, context, callback) => {
   }
 
   timeStart(TIMER_BUNDLE_REQUEST_DURATION);
+
+  log(`Running on node ${process.version}`);
 
   const params = Object.assign({
     packages: '',
