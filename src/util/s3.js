@@ -2,12 +2,9 @@ import AWS from 'aws-sdk';
 import { TIMER_S3_UPLOAD, TIMER_S3_DOWNLOAD, timeStart, timeEnd } from './timer-keys';
 import log from './logger';
 
-// first option is micros, second option is fallback
-const S3_BUCKET = 'morty-dev-jscache-fktj6ok81p5z'; // process.env.S3_CACHE_BUCKET_NAME || process.env.FROG_S3_CACHE_BUCKET_NAME;
-const S3_REGION = 'ap-southeast-2'; // process.env.S3_CACHE_BUCKET_REGION || process.env.FROG_S3_CACHE_BUCKET_REGION;
-const S3_BUCKET_PATH = process.env.S3_CACHE_BUCKET_PATH || '';
-// const ACCESS_KEY_ID = process.env.ACCESS_KEY_ID || process.env.FROG_ACCESS_KEY_ID;
-// const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY || process.env.FROG_SECRET_ACCESS_KEY;
+// bucket/region hard coded due to cloudformation not exposing generated name
+const S3_BUCKET = 'morty-dev-jscache-fktj6ok81p5z';
+const S3_REGION = 'ap-southeast-2';
 
 function newS3() {
   return new AWS.S3({
@@ -15,16 +12,12 @@ function newS3() {
   });
 }
 
-function pathify(filename) {
-  return `${S3_BUCKET_PATH}/${filename}`;
-}
-
 function upload(filename, contents) {
   timeStart(TIMER_S3_UPLOAD);
   return new Promise((resolve, reject) => {
     newS3().putObject({
       Bucket: S3_BUCKET,
-      Key: pathify(filename),
+      Key: filename,
       Body: contents,
     }, (err) => {
       timeEnd(TIMER_S3_UPLOAD);
@@ -44,11 +37,11 @@ function download(filename) {
   return new Promise((resolve, reject) => {
     newS3().getObject({
       Bucket: S3_BUCKET,
-      Key: pathify(filename),
+      Key: filename,
     }, (err, data) => {
       timeEnd(TIMER_S3_DOWNLOAD);
       if (err || process.env.FROG_CACHE_DISABLED) {
-        log(`No cache found for '${filename}'`);
+        log(`No cache found for '${filename}'`, err);
         reject(err);
         return;
       }
