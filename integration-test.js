@@ -37,6 +37,7 @@ const testContains = (endpoint, contains, checkHeaders) => (
 setTimeout(() => {
   testContains('/bundle.js', 'Please supply at least 1 npm package')
   .then(testContains.bind(null, '/bundle.js?packages=left-pad@1.1.3', 'webpackUniversalModuleDefinition'))
+  .then(testContains.bind(null, '/bundle.js?packages=left@0.0.3&flags=minify', '/* Hi I\'m Morty the friendly Atlassian frog */'))
   .then(testContains.bind(null, '/bundle.js?packages=skatejs@1.x', 'location":', true))
   .then(testContains.bind(null, '/bundle.js?packages=ak-navigation@11.2.3', 'webpackUniversalModuleDefinition')) // testing 'engines' ignore flag since lambda only supports node 4.3
   .then(() => {
