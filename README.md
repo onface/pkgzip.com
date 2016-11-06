@@ -24,6 +24,48 @@ By default results are unminified. The `flags=minify` or `flags=minify,dedupe` p
 
 After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time. Results are GZIP encoded during transfer to the browser.
 
+### Development
+
+To get started simply npm install
+
+```
+npm install
+```
+
+And build Morty
+
+```
+npm run dist
+```
+
+To run a Morty server locally you can use
+
+```
+npm run offline
+```
+
+You will now be able to reach your local server from
+
+```
+localhost:3000/bundle.js?packages=ak-avatar
+```
+
+### Tests
+
+Tests are automatically run in CI. To run them locally use
+
+```
+npm run test
+```
+
+or
+
+```
+npm run test/watch
+```
+
+To have the code automatically be rebuilt and tested.
+
 ### Deploying to Lambda
 
 Changes to `master` are automatically tested and deployed via Bamboo.
