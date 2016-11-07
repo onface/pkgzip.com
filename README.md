@@ -26,48 +26,47 @@ After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation
 
 ### Development
 
-To get started simply npm install
+To get started simply yarn install
 
-```
-npm install
-```
-
-And build Morty
-
-```
-npm run dist
+```bash
+npm install -g yarn
+yarn install
 ```
 
 To run a Morty server locally you can use
 
-```
+```bash
 npm run offline
-```
 
-You will now be able to reach your local server from
-
-```
-localhost:3000/bundle.js?packages=ak-avatar
+# now go to http://localhost:3000/dev/bundle.js?packages=ak-avatar
 ```
 
 ### Tests
 
-Tests are automatically run in CI. To run them locally use
+Tests are automatically run in CI.
+
+#### Unit tests
+
+To run tests locally use
 
 ```
 npm run test
 ```
 
-or
+To have the code automatically be re-tested whenever you modify a file, use `npm run test/watch`
+
+#### Integration tests
+
+Some end to end tests are provided to make sure expected output is returned from relevant endpoints.
+
+Integration tests are run automatically in CI, but if you want you can run them locally too using
 
 ```
-npm run test/watch
+npm run integration-test
 ```
-
-To have the code automatically be rebuilt and tested.
 
 ### Deploying to Lambda
 
-Changes to `master` are automatically tested and deployed via Bamboo.
+Changes to `master` are automatically tested and deployed via [Bamboo](https://ecosystem-bamboo.internal.atlassian.com/browse/AUI-DMS).
 
-![Morty](https://bitbucket.org/repo/qbqoG9/images/3560229856-Screen%20Shot%202016-10-21%20at%2011.00.02%20am.png)
+![Morty](https://bitbucket.org/atlassian/morty/avatar/48/)
