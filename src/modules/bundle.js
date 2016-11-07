@@ -36,9 +36,7 @@ const Bundle = (buildFlags = {}, requestedPkgs = []) => (
           const resultJs = fs.readFileSync(`${buildDir}/bundle.js`, 'utf8');
           if (resultJs) {
             const watermarkJs = `${watermark}\n${resultJs}`;
-            upload(cdnFilename, watermarkJs).then(() => resolve(watermarkJs)).catch((e2) => {
-              reject(e2);
-            });
+            upload(cdnFilename, watermarkJs).then(() => resolve(watermarkJs));
           } else {
             reject('No results');
           }
