@@ -14,7 +14,7 @@ function newS3() {
 
 function upload(filename, contents) {
   timeStart(TIMER_S3_UPLOAD);
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     newS3().putObject({
       Bucket: S3_BUCKET,
       Key: filename,
@@ -23,7 +23,7 @@ function upload(filename, contents) {
       timeEnd(TIMER_S3_UPLOAD);
       if (err) {
         log(`Got error uploading '${filename}' to S3. ${JSON.stringify(err)}`);
-        reject(err);
+        resolve();
         return;
       }
       log(`Uploaded '${filename}' to S3`);
