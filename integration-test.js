@@ -7,7 +7,7 @@ const exec = require('child_process').exec;
 const slsBin = path.join(__dirname, 'node_modules', '.bin', 'sls');
 const randomPort = Math.floor(1000 + (8999 * Math.random()));
 
-exec(`${slsBin} offline --dontPrintOutput --noTimeout --port=${randomPort} --stage=dev`, (error, stdout, stderr) => {
+exec(`${slsBin} offline --prefix dev --dontPrintOutput --noTimeout --port=${randomPort} --stage=dev`, (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
     return;
@@ -35,11 +35,11 @@ const testContains = (endpoint, contains, checkHeaders) => (
 );
 
 setTimeout(() => {
-  testContains('/bundle.js', 'Please supply at least 1 npm package')
-  .then(testContains.bind(null, '/bundle.js?packages=left-pad@1.1.3', 'webpackUniversalModuleDefinition'))
-  .then(testContains.bind(null, '/bundle.js?packages=left@0.0.3&flags=minify', '/* Hi I\'m Morty the friendly Atlassian webpack frog */'))
-  .then(testContains.bind(null, '/bundle.js?packages=skatejs@1.x', 'location":', true))
-  .then(testContains.bind(null, '/bundle.js?packages=ak-navigation@11.2.3', 'webpackUniversalModuleDefinition')) // testing 'engines' ignore flag since lambda only supports node 4.3
+  testContains('/dev/bundle.js', 'Please supply at least 1 npm package')
+  .then(testContains.bind(null, '/dev/bundle.js?packages=left-pad@1.1.3', 'webpackUniversalModuleDefinition'))
+  .then(testContains.bind(null, '/dev/bundle.js?packages=left@0.0.3&flags=minify', '/* Hi I\'m Morty the friendly Atlassian webpack frog */'))
+  .then(testContains.bind(null, '/dev/bundle.js?packages=skatejs@1.x', 'location":', true))
+  .then(testContains.bind(null, '/dev/bundle.js?packages=ak-navigation@11.2.3', 'webpackUniversalModuleDefinition')) // testing 'engines' ignore flag since lambda only supports node 4.3
   .then(() => {
     console.log('');
     console.log('✅ All integration tests passed');
