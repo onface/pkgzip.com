@@ -215,7 +215,7 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-sdk@^2.3.17, aws-sdk@^2.7.5:
+aws-sdk@^2.3.17:
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.7.5.tgz#dac87896459bd4ca3f593fa65478ff43ee1843af"
   dependencies:
@@ -225,6 +225,20 @@ aws-sdk@^2.3.17, aws-sdk@^2.7.5:
     querystring "0.2.0"
     sax "1.1.5"
     url "0.10.3"
+    xml2js "0.4.15"
+    xmlbuilder "2.6.2"
+
+aws-sdk@^2.7.10:
+  version "2.7.10"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.7.10.tgz#d914ca2bdb6ff8b48cdbc20d617b7c6b6031c138"
+  dependencies:
+    buffer "4.9.1"
+    crypto-browserify "1.0.9"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.1.5"
+    url "0.10.3"
+    uuid "3.0.0"
     xml2js "0.4.15"
     xmlbuilder "2.6.2"
 
@@ -1102,7 +1116,7 @@ crypto-browserify@~3.2.6:
     ripemd160 "0.2.0"
     sha.js "2.2.6"
 
-crypto@0.0.3:
+crypto@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/crypto/-/crypto-0.0.3.tgz#470a81b86be4c5ee17acc8207a1f5315ae20dbb0"
 
@@ -2503,7 +2517,7 @@ lodash.keys@^3.0.0:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.16.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.8.0:
+lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.8.0:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
@@ -3342,24 +3356,24 @@ semver@~5.0.1:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.0.3.tgz#77466de589cd5d3c95f138aa78bc569a3cb5d27a"
 
-serverless-offline@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-3.3.3.tgz#2b5bb7c3e400aae15c3a8a187c675db799236df2"
+serverless-offline@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-3.5.4.tgz#d58717fd63328a6807b9fff7b0d61a62ae54d3b4"
   dependencies:
     babel-register "^6.18.0"
     boom "^4.2.0"
     coffee-script "^1.11.1"
-    crypto "0.0.3"
+    crypto "^0.0.3"
     hapi "15.2.0"
     hapi-cors-headers "^1.0.0"
     js-string-escape "^1.0.1"
     jsonpath-plus "^0.15.0"
-    lodash "^4.16.4"
-    velocityjs "^0.9.0"
+    lodash "^4.17.2"
+    velocityjs "^0.9.1"
 
-serverless@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.1.0.tgz#c52e2e830489b9462d4c80f7e4bd636e1239e323"
+serverless@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.3.0.tgz#5b1143b67b201de21f152192d8f7920bbf785c48"
   dependencies:
     archiver "^1.1.0"
     async "^1.5.2"
@@ -3689,9 +3703,9 @@ timers-browserify@^1.0.1:
   dependencies:
     process "~0.11.0"
 
-tmp@0.0.30:
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.30.tgz#72419d4a8be7d6ce75148fd8b324e593a711c2ed"
+tmp@^0.0.31:
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.31.tgz#8f38ab9438e17315e5dbd8b3657e8bfb277ae4a7"
   dependencies:
     os-tmpdir "~1.0.1"
 
@@ -3820,13 +3834,13 @@ util@0.10.3, "util@>=0.10.3 <1", util@~0.10.3:
   dependencies:
     inherits "2.0.1"
 
+uuid@3.0.0, uuid@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.0.tgz#6728fc0459c450d796a99c31837569bdf672d728"
+
 uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
-
-uuid@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.0.tgz#6728fc0459c450d796a99c31837569bdf672d728"
 
 v8flags@^2.0.10:
   version "2.0.11"
@@ -3841,9 +3855,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-velocityjs@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/velocityjs/-/velocityjs-0.9.0.tgz#5454d004993e0392382f5e770fcfafc581335a88"
+velocityjs@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/velocityjs/-/velocityjs-0.9.1.tgz#cdab669ae6199c605f5254bad9d1140468def1d2"
 
 verror@1.3.6:
   version "1.3.6"
