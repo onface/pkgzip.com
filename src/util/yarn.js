@@ -1,5 +1,5 @@
 import path from 'path';
-// import os from 'os';
+import os from 'os';
 import fs from 'fs';
 import childProc from 'child_process';
 import tmpDir from './tmp-dir';
@@ -30,8 +30,8 @@ function doYarn(buildDir) {
   return new Promise((resolve, reject) => {
     try {
       timeStart(TIMER_YARN_INSTALL_TOTAL);
-      // childProc.exec(`${yarnBin} --ignore-engines --cache-folder ${os.tmpdir()}`, ...
-      childProc.exec(`${yarnBin} --ignore-engines}`, { cwd: buildDir }, (err) => {
+      childProc.exec(`${yarnBin} --ignore-engines --cache ${os.tmpdir()}`, { cwd: buildDir }, (err) => {
+      // childProc.exec(`${yarnBin} --ignore-engines`, { cwd: buildDir }, (err) => {
         timeEnd(TIMER_YARN_INSTALL_TOTAL);
         if (err) {
           throw new Error(err);
