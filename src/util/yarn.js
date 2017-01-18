@@ -30,7 +30,9 @@ function doYarn(buildDir) {
   return new Promise((resolve, reject) => {
     try {
       timeStart(TIMER_YARN_INSTALL_TOTAL);
-      childProc.exec(`${yarnBin} --ignore-engines --cache-folder ${os.tmpdir()}`, { cwd: buildDir }, (err) => {
+      childProc.exec(`${yarnBin} --ignore-engines --prod --cache-folder ${os.tmpdir()}`, {
+        cwd: buildDir,
+      }, (err) => {
       // childProc.exec(`${yarnBin} --ignore-engines`, { cwd: buildDir }, (err) => {
         timeEnd(TIMER_YARN_INSTALL_TOTAL);
         if (err) {
