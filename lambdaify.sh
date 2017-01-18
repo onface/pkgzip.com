@@ -15,6 +15,7 @@ cp yarn.lock morty/
 # install node_moedules in morty dir
 cd morty
 yarn --prod
+npm install bengummer/yarn#lambda-fix --force --legacy-bundling
 npm install mkdirp glob-all filesize # needed on lambda for some reason
 cd ..
 
