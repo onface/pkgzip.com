@@ -2,6 +2,7 @@ import deepEqual from 'lodash.isequal';
 import bundleFn from './modules/bundle';
 import expandVersions from './util/expand-versions';
 import rebuildUrl from './util/rebuild-url';
+import detectEnv from './util/detect-env';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
 import log from './util/logger';
@@ -51,7 +52,8 @@ module.exports.bundle = (event, context, callback) => {
     if (deepEqual(requestedPkgs, expandedPackages)) {
       return expandedPackages;
     }
-    const redirUrl = rebuildUrl(expandedPackages, buildFlags);
+    const detectedEnv = detectEnv(event.path);
+    const redirUrl = rebuildUrl(expandedPackages, buildFlags, detectedEnv);
     respond(302, redirUrl);
     throw new Error(ERR_EXPANSION_NEEDS_REDIRECT);
   })
