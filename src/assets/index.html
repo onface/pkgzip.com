@@ -13,8 +13,12 @@
       }
 
       ul {
-        margin: 0;
+        margin: 1em 0 2em 0;
         padding: 0 0 0 1em;
+      }
+
+      h3 {
+        margin-top: 2em;
       }
     </style>
   </head>
@@ -28,13 +32,30 @@
         To get started try playing with this URL: <a href="https://pkgzip.com/bundle.js?packages=left-pad">https://pkgzip.com/bundle.js?packages=left-pad</a>
       </p>
 
+      <h3>Can I just use GoMix or Webpackbin instead?</h3>
+      <p>Yes! But sometimes you might want to use pkgzip instead:</p>
+      <ul>
+        <li>Other services can sometimes not work with browser-specific package functionality</li>
+        <li>You might want to build a static HTML page with a single &lt;script&gt; tag</li>
+      </ul>
+
+      <h3>How does this differ to unpkg.com?</h3>
+      <p>The main difference is that pkgzip includes all the dependencies of your packages as well.</p>
+      <ul>
+        <li>Bundles dependencies as well</li>
+        <li>Supports multiple packages in a single request</li>
+        <li>Exposes packages as via window.pkgName</li>
+      </ul>
+      <p>But if your situation is covered by unpkg then use that, it's awesome!</p>
+
       <h3>Features</h3>
       <ul>
-        <li>Caches results server-side for fast 2nd-time responses</li>
-        <li>Grabs requested packages using yarn (much faster)</li>
+        <li>Supports multiple packages in a single request (?packages=left-pad,right-pad)</li>
         <li>Supports fixed (1.9.0) and flexible (@1.x / @^1.2.0 / @latest / etc) semver ranges</li>
         <li>Minification (?flags=minify)</li>
         <li>Deduplication (?flags=minify,dedupe)</li>
+        <li>Caches results server-side for fast 2nd-time responses</li>
+        <li>Grabs requested packages using yarn (much faster)</li>
       </ul>
     </section>
   </body>
