@@ -28,6 +28,14 @@ resources:
   Resources:
     jscache:
       Type: AWS::S3::Bucket
+    pathmapping:
+      Type: AWS::ApiGateway::BasePathMapping
+      Properties:
+        BasePath: oauth2
+        DomainName: pkgzip.com
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        Stage: dev
 
 plugins:
   - serverless-offline
