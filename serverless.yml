@@ -31,11 +31,11 @@ resources:
     pathmapping:
       Type: AWS::ApiGateway::BasePathMapping
       Properties:
-        BasePath: oauth2
         DomainName: pkgzip.com
         RestApiId:
           Ref: ApiGatewayRestApi
         Stage: dev
+        # BasePath: oauth2
 
 plugins:
   - serverless-offline
