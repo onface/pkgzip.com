@@ -10,9 +10,9 @@ function combinePkgNameAndVer(pkg) {
   return pkgName;
 }
 
-function rebuildUrl(expandedPackages, buildFlags, env = 'dev') {
+function rebuildUrl(expandedPackages, buildFlags, env) {
   const allowedEnvs = ['dev', 'production'];
-  const finalEnv = allowedEnvs.includes(env) ? env : allowedEnvs[0];
+  const finalEnv = allowedEnvs.includes(env) ? env : false;
   const selectedFlags = [];
   const allowedFlags = [
     { flag: 'dedupe' },
@@ -25,9 +25,10 @@ function rebuildUrl(expandedPackages, buildFlags, env = 'dev') {
     }
   });
 
+  const envPrefix = finalEnv ? `${finalEnv}/` : '';
   const rebuiltPackages = expandedPackages.map(combinePkgNameAndVer).join(',');
   const flagsParam = selectedFlags.length ? `&flags=${selectedFlags.join(',')}` : '';
-  return `/${finalEnv}/bundle.js?packages=${rebuiltPackages}${flagsParam}`;
+  return `/${envPrefix}bundle.js?packages=${rebuiltPackages}${flagsParam}`;
 }
 
 export default rebuildUrl;
