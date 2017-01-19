@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pkgzip</title>
+    <style>
+      body {
+        font: 14px/20px monospace;
+      }
+
+      section {
+        max-width: 400px;
+        margin: 4em auto;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0 0 0 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>pkgzip</h1>
+      <p>
+        pkgzip gives you a webpack'd bundle for your npm packages.
+      </p>
+      <p>
+        To get started try playing with this URL: <a href="https://pkgzip.com/bundle.js?packages=left-pad">https://pkgzip.com/bundle.js?packages=left-pad</a>
+      </p>
+
+      <h3>Features</h3>
+      <ul>
+        <li>Caches results server-side for fast 2nd-time responses</li>
+        <li>Grabs requested packages using yarn (much faster)</li>
+        <li>Supports fixed (1.9.0) and flexible (@1.x / @^1.2.0 / @latest / etc) semver ranges</li>
+        <li>Minification (?flags=minify)</li>
+        <li>Deduplication (?flags=minify,dedupe)</li>
+      </ul>
+    </section>
+  </body>
+</html>
