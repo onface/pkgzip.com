@@ -1,3 +1,5 @@
+import { isEnvAllowed } from './allowed-envs';
+
 function testAlwaysTrueIf(alwaysTrueIf, buildFlags) {
   return alwaysTrueIf && alwaysTrueIf.some(flg => !!buildFlags[flg]);
 }
@@ -11,8 +13,7 @@ function combinePkgNameAndVer(pkg) {
 }
 
 function rebuildUrl(expandedPackages, buildFlags, env) {
-  const allowedEnvs = ['dev', 'production'];
-  const finalEnv = allowedEnvs.includes(env) ? env : false;
+  const finalEnv = isEnvAllowed(env) ? env : false;
   const selectedFlags = [];
   const allowedFlags = [
     { flag: 'dedupe' },
