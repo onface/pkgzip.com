@@ -5,29 +5,41 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
       body {
-        font-size: 14px;
+        font-size: 16px;
         font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Oxygen,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-        line-height: 20px;
+        line-height: 22px;
         color: #091E42;
       }
 
       h1, h2 {
-        font-weight: 500;
         color: #403294;
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 32px;
+        font-weight: 300;
+      }
+
+      h1 small {
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #666;
       }
 
       h2 {
-        font-size: 16px;
+        font-size: 20px;
+        font-weight: 400;
         margin-top: 3em;
       }
 
       section {
         max-width: 600px;
         margin: 4em auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 4em;
       }
 
       ul {
@@ -47,21 +59,34 @@
   </head>
   <body>
     <section>
-      <h1>pkgzip</h1>
-      <p>
-        Your npm packages, webpacked with dependencies.
-      </p>
+      <header>
+        <h1>pkgzip <small>beta</small></h1>
+        <p>
+          Your npm packages, webpacked with dependencies.
+        </p>
+      </header>
 
       <p data-height="436" data-theme-id="0" data-slug-hash="JEWRpL" data-default-tab="html,result" data-user="bengummer" data-embed-version="2" data-pen-title="pkgzip demo" class="codepen"></p>
       <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-      <h2>What's the URL?</h2>
-      <p>
-        <a href="https://pkgzip.com/bundle.js?packages=left-pad">https://pkgzip.com/bundle.js?packages=left-pad</a>
+      <h2>What's the URL I should use for script tags?</h2>
+      <p style="font-family: monospace; font-size: 15px;">
+        &lt;script src=&quot;<a href="https://pkgzip.com/bundle.js?packages=left-pad">https://pkgzip.com/bundle.js?packages=left-pad</a>&quot;&gt;&lt;/script&gt;
       </p>
+      <p>You'll now have <code>window.leftPad</code> available to use.</p>
 
       <h2>Can I just use unpkg/Gomix/Webpackbin instead?</h2>
-      <p>Yes, they are awesome! Pkgzip is useful when you want to use packages with dependencies in your own environment, such as a static HTML file or a Codepen.</p>
+      <p>Maybe, those tools are awesome! Pkgzip is useful when you want to use packages with dependencies in your own environment, such as a static HTML file or a Codepen.</p>
+
+      <h2>Should I use this on my production site?</h2>
+      <p>Nope. It's great for prototyping but your production users will probably notice some lag.</p>
+
+      <!--
+        ### Ssecret feature for people who view source:
+        Append &flags=minify,dedupe to your URL for smaller bundles.
+        e.g. https://pkgzip.com/bundle.js?packages=left-pad@1.1.3&flags=minify,dedupe
+        Enjoy :)
+      -->
     </section>
   </body>
 </html>
