@@ -12,19 +12,15 @@ export default function (opts) {
   ];
 
   if (buildFlags.minify) {
-    selectedPlugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        include: 'bundle.js',
-      })
-    );
+    selectedPlugins.push(new webpack.optimize.UglifyJsPlugin({
+      include: 'bundle.js',
+    }));
   }
 
   if (buildFlags.dedupe) {
-    selectedPlugins.push(
-      new webpack.optimize.DedupePlugin({
-        include: 'bundle.js',
-      })
-    );
+    selectedPlugins.push(new webpack.optimize.DedupePlugin({
+      include: 'bundle.js',
+    }));
   }
 
   const compiler = webpack({
