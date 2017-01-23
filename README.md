@@ -1,11 +1,11 @@
-# morty
+# pkgzip
 
 Bundles your npm packages via webpack into a single JS file. Runs on AWS lambda.
 
 ### Usage
 
 ```html
-<script src="https://eovrzrbij2.execute-api.ap-southeast-2.amazonaws.com/dev/bundle.js?packages=ak-navigation@latest,ak-icon@8.x&flags=minify,dedupe"></script>
+<script src="https://pkgzip.com/bundle.js?packages=ak-navigation@latest,ak-icon@8.x&flags=minify,dedupe"></script>
 ```
 
 ### API
@@ -33,7 +33,7 @@ npm install -g yarn
 yarn install
 ```
 
-To run a Morty server locally you can use
+To run a `pkgzip` server locally you can use
 
 ```bash
 npm run offline
