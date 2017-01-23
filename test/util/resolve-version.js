@@ -51,57 +51,66 @@ describe('resolveVersion()', () => {
     });
 
     it('should handle N.x version format', () => (
-      expect(resolveVersion('ak-button', '0.x')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '0.5.2' }
-      )
+      expect(resolveVersion('ak-button', '0.x')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '0.5.2',
+      })
     ));
 
     it('should handle caret ^ versions', () => (
-      expect(resolveVersion('ak-button', '^1.5.1')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
-      )
+      expect(resolveVersion('ak-button', '^1.5.1')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.6.0',
+      })
     ));
 
     it('should handle tilde ~ versions', () => (
-      expect(resolveVersion('ak-button', '~1.5.1')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.5.2' }
-      )
+      expect(resolveVersion('ak-button', '~1.5.1')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.5.2',
+      })
     ));
 
     it('should handle > versions', () => (
-      expect(resolveVersion('ak-button', '>1.3.3')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
-      )
+      expect(resolveVersion('ak-button', '>1.3.3')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.6.0',
+      })
     ));
 
     it('should handle >= versions', () => (
-      expect(resolveVersion('ak-button', '>=1.3.3')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
-      )
+      expect(resolveVersion('ak-button', '>=1.3.3')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.6.0',
+      })
     ));
 
     it('should handle < versions', () => (
-      expect(resolveVersion('ak-button', '<1.0.0')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '0.5.2' }
-      )
+      expect(resolveVersion('ak-button', '<1.0.0')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '0.5.2',
+      })
     ));
 
     it('should handle <= versions', () => (
-      expect(resolveVersion('ak-button', '<=1.0.0')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.0.0' }
-      )
+      expect(resolveVersion('ak-button', '<=1.0.0')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.0.0',
+      })
     ));
 
     it('should return latest if no version requested supplied', () => (
-      expect(resolveVersion('ak-button', '')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
-      )
+      expect(resolveVersion('ak-button', '')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.6.0',
+      })
     ));
 
     it('should return latest if "latest" supplied', () => (
-      expect(resolveVersion('ak-button', 'latest')).to.eventually.deep.equal(
-        { pkgName: 'ak-button', pkgVersion: '1.6.0' }
-      )
+      expect(resolveVersion('ak-button', 'latest')).to.eventually.deep.equal({
+        pkgName: 'ak-button',
+        pkgVersion: '1.6.0',
+      })
     ));
   });
 
@@ -120,9 +129,10 @@ describe('resolveVersion()', () => {
     });
 
     it('should resolve promise with empty version for unknown component', () => (
-      expect(resolveVersion('ak-doesnt-exist', '0.x')).to.eventually.deep.equal(
-        { pkgName: 'ak-doesnt-exist', pkgVersion: undefined }
-      )
+      expect(resolveVersion('ak-doesnt-exist', '0.x')).to.eventually.deep.equal({
+        pkgName: 'ak-doesnt-exist',
+        pkgVersion: undefined,
+      })
     ));
   });
 });
