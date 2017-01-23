@@ -1,4 +1,4 @@
-# fix docker missing pkgs
+# fix docker missing pkgs (TODO: see if this line can be removed)
 npm install glob-all filesize
 
 SLS="`npm bin`/serverless"
@@ -15,8 +15,8 @@ cp yarn.lock morty/
 # install node_moedules in morty dir
 cd morty
 yarn --prod
-npm install bengummer/yarn#lambda-fix --force --legacy-bundling
-npm install mkdirp glob-all filesize # needed on lambda for some reason
+npm install bengummer/yarn#lambda-fix --force --legacy-bundling # TODO: see if can remove
+npm install mkdirp glob-all filesize # needed on lambda for some reason. TODO: see if can remove
 cd ..
 
 # lint and test
@@ -24,7 +24,7 @@ sleep 2
 npm run lint
 npm run test
 
-# build app
+# build app to handler.js
 npm run dist
 
 # run integration-test
