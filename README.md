@@ -1,44 +1,55 @@
 # pkgzip
 
-Bundles your npm packages via webpack into a single JS file. Runs on AWS lambda.
+Bundles your npm packages via webpack into a single JS file. Runs on AWS Lambda.
 
-### Usage
+## Usage
 
 ```html
-<script src="https://pkgzip.com/bundle.js?packages=ak-navigation@latest,ak-icon@8.x&flags=minify,dedupe"></script>
+<script src="https://pkgzip.com/bundle.js?packages=react,react-dom"></script>
+
+<!--
+semver ranges:
+https://pkgzip.com/bundle.js?packages=left-pad@^1.1.3,right-pad@1.x
+
+minification:
+https://pkgzip.com/bundle.js?packages=left-pad&flags=minify
+
+deduping:
+https://pkgzip.com/bundle.js?packages=left-pad,right-pad&flags=dedupe
+-->
 ```
 
-### API
+## API
 
-Package versions can be specified with the common [semver](http://semver.org) formats:
+The following URL parameters are accepted:
 
--  Fixed versions - `ak-navigation@11.2.1`
--  .x versions - `ak-navigation@11.x`
--  Caret versions - `ak-navigation@^11.2.1`
--  Tilde versions - `ak-navigation@~11.2.1`
--  ..as well as `<1.x <=1.x >=1.x >1.x`
+### `packages`
 
-### Compression and caching
+A required comma-separated list of public npm package names.
 
-By default results are unminified. The `flags=minify` or `flags=minify,dedupe` parameter can be to trigger minification + deduplication.
+Each package name can optionally be suffixed with `@version`, where `version` is any [semver](http://semver.org)-compliant version range.
 
-After your request has been expanded (e.g. `ak-navigation@11.x ==> ak-navigation@11.2.1`), the result is cached indefinitely to S3 for faster results next time. Results are GZIP encoded during transfer to the browser.
+### `flags`
 
-### Development
+A optional comma-separated list of values from the following options:
+
+*  `minify`: enables minification of returned JavaScript
+*  `dedupe`: enabled de-duplication of modules used more than once
+
+## Development
 
 To get started simply yarn install
 
 ```bash
-npm install -g yarn
-yarn install
+git clone git@bitbucket.org:atlassian/pkgzip.git
+yarn install # if you need yarn: npm install -g yarn
 ```
 
 To run a `pkgzip` server locally you can use
 
 ```bash
 npm run offline
-
-# now go to http://localhost:3000/dev/bundle.js?packages=ak-avatar
+# now go to http://localhost:3000/dev/bundle.js?packages=left-pad
 ```
 
 ### Tests
@@ -65,8 +76,10 @@ Integration tests are run automatically in CI, but if you want you can run them 
 npm run integration-test
 ```
 
-### Deploying to Lambda
+## Deploying to Lambda
 
-Changes to `master` are automatically tested and deployed via [Bamboo](https://ecosystem-bamboo.internal.atlassian.com/browse/AUI-DMS).
+Changes to `master` are automatically tested and deployed to Lambda via [Bamboo](https://ecosystem-bamboo.internal.atlassian.com/browse/AUI-DMS).
 
-![Morty](https://bitbucket.org/atlassian/morty/avatar/48/)
+AWS Lambda has some environment restrictions (e.g. old version of Node JS), so a Docker image is used to rebuild the app (including node modules) and then deploy to Lambda.
+
+![Morty](https://i.imgur.com/BQoEXts.png)
