@@ -226,9 +226,9 @@ aws-sdk@^2.7.13:
     xml2js "0.4.15"
     xmlbuilder "2.6.2"
 
-aws-sdk@^2.7.27:
-  version "2.7.27"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.7.27.tgz#6fc4793c166172a0f95af7dce177244cb471c50a"
+aws-sdk@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.9.0.tgz#f258dcc295b1e7eca49d3624abfbf5f7d644172c"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -281,31 +281,7 @@ babel-code-frame@^6.16.0, babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-core@^6.22.0:
-  version "6.22.0"
-  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.22.0.tgz#643deaeb520bcd2b06c11e39945c877e0200d128"
-  dependencies:
-    babel-code-frame "^6.22.0"
-    babel-generator "^6.22.0"
-    babel-helpers "^6.22.0"
-    babel-messages "^6.22.0"
-    babel-register "^6.22.0"
-    babel-runtime "^6.22.0"
-    babel-template "^6.22.0"
-    babel-traverse "^6.22.0"
-    babel-types "^6.22.0"
-    babylon "^6.11.0"
-    convert-source-map "^1.1.0"
-    debug "^2.1.1"
-    json5 "^0.5.0"
-    lodash "^4.2.0"
-    minimatch "^3.0.2"
-    path-is-absolute "^1.0.0"
-    private "^0.1.6"
-    slash "^1.0.0"
-    source-map "^0.5.0"
-
-babel-core@^6.22.1:
+babel-core@^6.22.0, babel-core@^6.22.1:
   version "6.22.1"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.22.1.tgz#9c5fd658ba1772d28d721f6d25d968fc7ae21648"
   dependencies:
@@ -692,21 +668,7 @@ babel-template@^6.22.0:
     babylon "^6.11.0"
     lodash "^4.2.0"
 
-babel-traverse@^6.22.0:
-  version "6.22.0"
-  resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.22.0.tgz#998b6de3228bd2bab0d748a6ec0588c32033d3c7"
-  dependencies:
-    babel-code-frame "^6.22.0"
-    babel-messages "^6.22.0"
-    babel-runtime "^6.22.0"
-    babel-types "^6.22.0"
-    babylon "^6.15.0"
-    debug "^2.2.0"
-    globals "^9.0.0"
-    invariant "^2.2.0"
-    lodash "^4.2.0"
-
-babel-traverse@^6.22.1:
+babel-traverse@^6.22.0, babel-traverse@^6.22.1:
   version "6.22.1"
   resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.22.1.tgz#3b95cd6b7427d6f1f757704908f2fc9748a5f59f"
   dependencies:
@@ -1315,16 +1277,9 @@ diff@^2.2.1:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/diff/-/diff-2.2.3.tgz#60eafd0d28ee906e4e8ff0a52c1229521033bf99"
 
-doctrine@1.5.0:
+doctrine@1.5.0, doctrine@^1.2.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
-  dependencies:
-    esutils "^2.0.2"
-    isarray "^1.0.0"
-
-doctrine@^1.2.2:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.3.0.tgz#13e75682b55518424276f7c173783456ef913d26"
   dependencies:
     esutils "^2.0.2"
     isarray "^1.0.0"
@@ -1544,9 +1499,9 @@ eslint-plugin-react@^6.5.0:
     doctrine "^1.2.2"
     jsx-ast-utils "^1.3.4"
 
-eslint@^3.14.0:
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.14.0.tgz#2c617e5f782fda5cbee5bc8be7ef5053af8e63a3"
+eslint@^3.14.1:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.14.1.tgz#8a62175f2255109494747a1b25128d97b8eb3d97"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -2374,9 +2329,9 @@ joi@9.x.x:
     moment "2.x.x"
     topo "2.x.x"
 
-js-sha256@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.4.0.tgz#0886cddcfdb083d3246d3418a168735688853b9c"
+js-sha256@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.5.0.tgz#438d17a71718bb3dfe00534a48b712b57303985f"
 
 js-string-escape@^1.0.1:
   version "1.0.1"
@@ -3090,9 +3045,9 @@ proper-lockfile@^1.1.3:
     graceful-fs "^4.1.2"
     retry "^0.10.0"
 
-proxyquire@^1.7.10:
-  version "1.7.10"
-  resolved "https://registry.yarnpkg.com/proxyquire/-/proxyquire-1.7.10.tgz#75be0770a81188f4d08bd01dfc30b767365aa20d"
+proxyquire@^1.7.11:
+  version "1.7.11"
+  resolved "https://registry.yarnpkg.com/proxyquire/-/proxyquire-1.7.11.tgz#13b494eb1e71fb21cc3ebe3699e637d3bec1af9e"
   dependencies:
     fill-keys "^1.0.2"
     module-not-found-error "^1.0.0"
@@ -3409,9 +3364,9 @@ serverless-offline@^3.5.4:
     lodash "^4.17.4"
     velocityjs "^0.9.3"
 
-serverless@^1.3.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.5.1.tgz#9823591d0184745f27cb4ffce928c456fa136aab"
+serverless@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.6.1.tgz#822ca465e086ed54a0dab77c2df30db18dc18848"
   dependencies:
     archiver "^1.1.0"
     async "^1.5.2"
