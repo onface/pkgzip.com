@@ -22,7 +22,7 @@ const Bundle = (buildFlags = {}, requestedPkgs = []) => (
       yarnInstall(requestedPkgs).then((yarnResult) => {
         const { buildDir } = yarnResult;
         const entryFile = `${buildDir}/entry.js`;
-        const entryContents = allPkgNames.map(pkg => `\nwindow.${camelcase(pkg)} = require('${pkg}');`).join('');
+        const entryContents = allPkgNames.map(pkg => `\nwindow['${camelcase(pkg)}'] = require('${pkg}');`).join('');
         fs.writeFileSync(entryFile, entryContents);
 
         const compiler = webpackGen({ buildDir, buildFlags });

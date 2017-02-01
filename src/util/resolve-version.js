@@ -5,7 +5,7 @@ import log from './logger';
 function getVersions(pkgName) {
   return new Promise((resolve) => {
     request.get({
-      url: `https://registry.npmjs.org/${pkgName}`,
+      url: `https://registry.npmjs.org/${pkgName.replace('/', '%2F')}`,
       json: true,
     }, (err, resp, body) => {
       if (err || (body && !('versions' in body))) {
