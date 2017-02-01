@@ -49,6 +49,7 @@ function doYarn(buildDir) {
 
 // entry fn
 function yarnInstall(packages) {
+  console.log('YARN', { packages });
   return new Promise((resolve, reject) => {
     tmpDir().then(createPkgJsonFile.bind(null, packages)).then(doYarn).then((pkgJsonResults) => {
       const { buildDir } = pkgJsonResults;
