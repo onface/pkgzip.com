@@ -38,8 +38,4 @@ describe('parsePkgTag()', () => {
       pkgVersion: '^3.2.1',
     });
   });
-
-  // todo scoped without version
-
-  // todo scoped with version
 });
