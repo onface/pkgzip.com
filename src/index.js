@@ -4,6 +4,7 @@ import bundleFn from './modules/bundle';
 import expandVersions from './util/expand-versions';
 import rebuildUrl from './util/rebuild-url';
 import detectEnv from './util/detect-env';
+import parsePkgTag from './util/parse-pkg-tag';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
 import log from './util/logger';
@@ -44,10 +45,7 @@ module.exports.bundle = (event, context, callback) => {
   }, event.queryStringParameters);
 
   const pkgsParam = params.packages;
-  const requestedPkgs = pkgsParam.split(',').map((pkgDef) => {
-    const [pkgName, pkgVersion] = pkgDef.split('@');
-    return pkgName ? { pkgName, pkgVersion } : null;
-  }).filter(p => !!p);
+  const requestedPkgs = pkgsParam.split(',').map(parsePkgTag).filter(p => !!p);
 
   if (!requestedPkgs.length) {
     respond(500, 'Please supply at least 1 npm package name in the packages parameter');
