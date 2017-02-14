@@ -10,7 +10,7 @@
     "integration-test": "npm run dist && FROG_CACHE_DISABLED=1 AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY node ./integration-test.js",
     "lint": "eslint src test",
     "logs": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY serverless logs -f bundle -t",
-    "offline": "npm run dist && AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls offline --prefix dev --noTimeout",
+    "offline": "npm run dist && FROG_CACHE_DISABLED=1 AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls offline --prefix dev --noTimeout",
     "sls": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls",
     "test": "mocha --recursive --compilers js:babel-register",
     "test/watch": "npm run test -- -w"
@@ -74,5 +74,36 @@
     "serverless-offline": "^3.5.4",
     "sinon": "^1.17.6",
     "webpack-node-externals": "^1.5.4"
+  },
+  "babel": {
+    "presets": ["es2015"],
+    "plugins": [
+      "syntax-async-functions",
+      "transform-regenerator",
+      "array-includes"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "impliedStrict": true
+      }
+    },
+    "globals": {
+      "logger": true
+    },
+    "plugins": [
+      "mocha"
+    ],
+    "rules": {
+      "mocha/no-exclusive-tests": "error"
+    }
   }
 }
