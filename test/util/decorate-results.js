@@ -9,17 +9,17 @@ describe('decorateResults()', () => {
   it('should prepend output with comment indicating package names', () => {
     expect(decorateResults(['my-pkg'], '// webpack code')).to.equal(`// The following objects are now available!:
 
-// window.pkgzip['myPkg']
+// window.pkgzip['my-pkg']
 
 // ============
 // webpack code`);
   });
 
   it('should support multiple packages including scope', () => {
-    expect(decorateResults(['my-pkg', '@atlassian/button'], '// webpack code')).to.equal(`// The following objects are now available!:
+    expect(decorateResults(['my-pkg', '@atlassian/my-button'], '// webpack code')).to.equal(`// The following objects are now available!:
 
-// window.pkgzip['myPkg']
-// window.pkgzip['@atlassian/button']
+// window.pkgzip['my-pkg']
+// window.pkgzip['@atlassian/my-button']
 
 // ============
 // webpack code`);

@@ -22,7 +22,7 @@ describe('buildEntryFile()', () => {
       entryFilePath: '',
       allPkgNames: ['left-pad'],
     });
-    expect(fsWriteSpy.calledWith('', "window.pkgzip = {}; \nwindow.pkgzip['leftPad'] = require('left-pad');")).to.equal(true);
+    expect(fsWriteSpy.calledWith('', "window.pkgzip = {}; \nwindow.pkgzip['left-pad'] = require('left-pad');")).to.equal(true);
   });
 
   it('should support scoped package names', () => {
@@ -30,7 +30,7 @@ describe('buildEntryFile()', () => {
       entryFilePath: 'output-file.js',
       allPkgNames: ['left-pad', '@atlaskit/button'],
     });
-    expect(fsWriteSpy.calledWith('output-file.js', "window.pkgzip = {}; \nwindow.pkgzip['leftPad'] = require('left-pad');\nwindow.pkgzip['@atlaskit/button'] = require('@atlaskit/button');")).to.equal(true);
+    expect(fsWriteSpy.calledWith('output-file.js', "window.pkgzip = {}; \nwindow.pkgzip['left-pad'] = require('left-pad');\nwindow.pkgzip['@atlaskit/button'] = require('@atlaskit/button');")).to.equal(true);
   });
 
   it('should still return if empty packages array supplied', () => {
