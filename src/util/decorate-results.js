@@ -1,7 +1,5 @@
-import camelcase from 'camelcase';
-
 function decorateResults(allPkgNames, resultsBlob) {
-  const helpText = allPkgNames.map(pkg => `\n// window.pkgzip['${camelcase(pkg)}']`).join('');
+  const helpText = allPkgNames.map(pkg => `\n// window.pkgzip['${pkg}']`).join('');
 
   return resultsBlob && `// The following objects are now available!:
 ${helpText}
