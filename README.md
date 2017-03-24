@@ -33,8 +33,8 @@ Each package name can optionally be suffixed with `@version`, where `version` is
 
 A optional comma-separated list of values from the following options:
 
-*  `minify`: enables minification of returned JavaScript
-*  `dedupe`: enabled de-duplication of modules used more than once
+*   `minify`: enables minification of returned JavaScript
+*   `dedupe`: enabled de-duplication of modules used more than once
 
 ## Development
 
@@ -78,7 +78,7 @@ npm run integration-test
 
 ## Deploying to Lambda
 
-Changes to `master` are automatically tested and deployed to Lambda via [Bamboo](https://ecosystem-bamboo.internal.atlassian.com/browse/AUI-DMS).
+Changes to `master` are automatically tested and deployed to Lambda via [Bitbucket Pipelines](https://bitbucket.org/atlassian/pkgzip/addon/pipelines/home).
 
 AWS Lambda has some environment restrictions (e.g. old version of Node JS), so a Docker image is used to rebuild the app (including node modules) and then deploy to Lambda.
 
