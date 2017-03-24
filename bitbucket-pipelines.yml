@@ -1,6 +1,15 @@
 image: node:4.5
-
 pipelines:
+  branches:
+    master:
+      - step:
+          script:
+            - npm install -g yarn
+            - yarn
+            - npm run lint
+            - npm run test
+            - npm run integration-test
+            - npm run deploy
   default:
     - step:
         script:
@@ -8,5 +17,4 @@ pipelines:
           - yarn
           - npm run lint
           - npm run test
-          - npm run dist
-          - FROG_AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID FROG_AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY npm run integration-test
+          - npm run integration-test

@@ -4,13 +4,12 @@
   "description": "Bundles your npm packages via webpack into a single JS file",
   "main": "dist/index.js",
   "scripts": {
-    "bamboo/staging": "FROG_AWS_ACCESS_KEY_ID=$bamboo_AWS_ACCESS_KEY_PASSWORD FROG_AWS_SECRET_ACCESS_KEY=$bamboo_AWS_SECRET_ACCESS_KEY_PASSWORD npm run deploy",
-    "deploy": "docker build --build-arg AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID --build-arg AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY --no-cache -t lambda .",
+    "deploy": "./deploy_to_lambda.sh",
     "dist": "webpack",
-    "integration-test": "npm run dist && FROG_CACHE_DISABLED=1 AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY node ./integration-test.js",
+    "integration-test": "npm run dist && FROG_CACHE_DISABLED=1 node ./integration-test.js",
     "lint": "eslint src test",
     "logs": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY serverless logs -f bundle -t",
-    "offline": "npm run dist && FROG_CACHE_DISABLED=1 AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls offline --prefix dev --noTimeout",
+    "offline": "npm run dist && FROG_CACHE_DISABLED=1 sls offline --prefix dev --noTimeout",
     "sls": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls",
     "test": "mocha --recursive --compilers js:babel-register",
     "test/watch": "npm run test -- -w"

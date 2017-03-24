@@ -21,14 +21,9 @@ cd ..
 
 # lint and test
 sleep 2
-npm run lint
-npm run test
 
 # build app to handler.js
 npm run dist
-
-# run integration-test
-FROG_AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" FROG_AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" npm run integration-test
 
 # copy app into morty dir and deploy
 cp handler.js morty/
