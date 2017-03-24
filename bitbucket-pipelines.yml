@@ -4,5 +4,6 @@ pipelines:
   default:
     - step:
         script:
+          - npm install -g yarn
           - yarn
           - ./lambdaify.sh
