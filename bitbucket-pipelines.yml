@@ -6,7 +6,7 @@ pipelines:
           script:
             - node --version
             - npm install -g bengummer/yarn#lambda-fix
-            - yarn --ignore-engines
+            - yarn --ignore-engines || cat /opt/atlassian/pipelines/agent/build/yarn-error.log
             - npm run lint
             - npm run test
             - npm run integration-test
