@@ -5,8 +5,8 @@ pipelines:
       - step:
           script:
             - node --version
-            - npm install -g --ignore-engines bengummer/yarn#lambda-fix
-            - yarn
+            - npm install -g bengummer/yarn#lambda-fix
+            - yarn --ignore-engines
             - npm run lint
             - npm run test
             - npm run integration-test
