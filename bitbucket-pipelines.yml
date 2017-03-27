@@ -4,19 +4,19 @@ pipelines:
     master:
       - step:
           script:
-            - echo "DISABLED"
-            # - npm install -g yarn
-            # - yarn
-            # - npm run lint
-            # - npm run test
-            # - npm run integration-test
-            # - npm run deploy
+            - node --version
+            - npm install -g npm i -g bengummer/yarn#lambda-fix
+            - yarn
+            - npm run lint
+            - npm run test
+            - npm run integration-test
+            - npm run deploy
   default:
     - step:
         script:
-          - echo "DISABLED"
-          # - npm install -g yarn
-          # - yarn
-          # - npm run lint
-          # - npm run test
-          # - npm run integration-test
+          - node --version
+          - npm install -g npm i -g bengummer/yarn#lambda-fix
+          - yarn
+          - npm run lint
+          - npm run test
+          - npm run integration-test
