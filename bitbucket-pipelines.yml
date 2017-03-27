@@ -5,6 +5,7 @@ pipelines:
       - step:
           script:
             - node --version
+            - npm config set loglevel warn
             - npm install -g bengummer/yarn#lambda-fix
             - yarn --ignore-engines || cat /opt/atlassian/pipelines/agent/build/yarn-error.log
             - npm run lint
@@ -15,6 +16,7 @@ pipelines:
     - step:
         script:
           - node --version
+          - npm config set loglevel warn
           - npm install -g bengummer/yarn#lambda-fix
           - yarn --ignore-engines
           - npm run lint
