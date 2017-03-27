@@ -1,4 +1,4 @@
-image: lambci/lambda:nodejs
+image: node:4
 pipelines:
   branches:
     master:
