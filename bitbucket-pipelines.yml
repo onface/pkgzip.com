@@ -16,7 +16,7 @@ pipelines:
         script:
           - node --version
           - npm install -g bengummer/yarn#lambda-fix
-          - yarn
+          - yarn --ignore-engines
           - npm run lint
           - npm run test
           - npm run integration-test
