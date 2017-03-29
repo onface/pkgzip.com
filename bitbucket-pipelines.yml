@@ -1,4 +1,4 @@
-image: node:4.3
+image: node:6.10
 pipelines:
   branches:
     master:
@@ -6,8 +6,7 @@ pipelines:
           script:
             - node --version
             - npm config set loglevel warn
-            - npm install -g bengummer/yarn#lambda-fix
-            - yarn --ignore-engines
+            - yarn
             - npm run lint
             - npm run test
             - npm run integration-test
@@ -17,8 +16,7 @@ pipelines:
         script:
           - node --version
           - npm config set loglevel warn
-          - npm install -g bengummer/yarn#lambda-fix
-          - yarn --ignore-engines
+          - yarn
           - npm run lint
           - npm run test
           - npm run integration-test
