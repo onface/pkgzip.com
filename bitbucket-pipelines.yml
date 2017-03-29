@@ -6,7 +6,7 @@ pipelines:
           script:
             - node --version
             - npm config set loglevel warn
-            - yarn --ignore-engines
+            - yarn
             - npm run lint
             - npm run test
             - npm run integration-test
@@ -16,7 +16,7 @@ pipelines:
         script:
           - node --version
           - npm config set loglevel warn
-          - yarn --ignore-engines
+          - yarn
           - npm run lint
           - npm run test
           - npm run integration-test
