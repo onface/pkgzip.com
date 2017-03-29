@@ -6,7 +6,6 @@ pipelines:
           script:
             - node --version
             - npm config set loglevel warn
-            - npm install -g bengummer/yarn#lambda-fix
             - yarn --ignore-engines
             - npm run lint
             - npm run test
@@ -17,7 +16,6 @@ pipelines:
         script:
           - node --version
           - npm config set loglevel warn
-          - npm install -g bengummer/yarn#lambda-fix
           - yarn --ignore-engines
           - npm run lint
           - npm run test
