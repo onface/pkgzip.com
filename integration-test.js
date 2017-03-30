@@ -18,16 +18,21 @@ exec(`${slsBin} offline --dontPrintOutput --noTimeout --port=${randomPort} --sta
   console.log(`stderr: ${stderr}`);
 });
 
-const testContains = (testName, endpoint, contains, checkHeaders) => (
+const testContains = (testName, endpoint, { contains, doesNotContain, checkHeaders }) => (
   new Promise((resolve, reject) => {
     request({
       url: `http://localhost:${randomPort}${endpoint}`,
       followRedirect: false,
     }, (err, resp, body) => {
       const fieldBody = checkHeaders ? JSON.stringify(resp.headers) : body;
-      if (!fieldBody || fieldBody.indexOf(contains) === -1) {
+      if (doesNotContain) console.log('fieldBody', fieldBody);
+      if (contains && (!fieldBody || fieldBody.indexOf(contains) === -1)) {
         console.log('fieldBody', fieldBody);
         reject(`${testName} - ${endpoint}${checkHeaders ? ' headers' : ''} does not contain '${contains}'`);
+        return;
+      } else if (doesNotContain && (!fieldBody || fieldBody.indexOf(doesNotContain) !== -1)) {
+        console.log('fieldBody', fieldBody);
+        reject(`${testName} - ${endpoint}${checkHeaders ? ' headers' : ''} should not contain '${doesNotContain}'`);
         return;
       }
       console.log(`✅ ${testName}`);
@@ -37,12 +42,28 @@ const testContains = (testName, endpoint, contains, checkHeaders) => (
 );
 
 setTimeout(() => {
-  testContains('No packages message', '/bundle.js', 'Please supply at least 1 npm package')
-  .then(() => testContains('Unscoped packages', '/bundle.js?packages=left-pad@1.1.3', 'webpackUniversalModuleDefinition'))
-  .then(() => testContains('Scoped packages', '/bundle.js?packages=@atlaskit/button@1.0.0', 'webpackUniversalModuleDefinition'))
-  .then(() => testContains('Decoration', '/bundle.js?packages=preact@7.2.0', "// The following objects are now available!:\n\n// window.pkgzip['preact']"))
-  .then(() => testContains('Version expansion redirect', '/bundle.js?packages=skatejs@1.x', 'location":', true))
-  .then(() => testContains('Ignoring npm engines field', '/bundle.js?packages=ak-navigation@11.2.3', 'webpackUniversalModuleDefinition')) // testing 'engines' ignore flag since lambda only supports node 4.3
+  testContains('No packages message', '/bundle.js', { contains: 'Please supply at least 1 npm package' })
+  .then(() => testContains('Unscoped packages', '/bundle.js?packages=left-pad@1.1.3', {
+    contains: 'webpackUniversalModuleDefinition',
+  }))
+  .then(() => testContains('Scoped packages', '/bundle.js?packages=@atlaskit/button@1.0.0', {
+    contains: 'webpackUniversalModuleDefinition',
+  }))
+  .then(() => testContains('Decoration', '/bundle.js?packages=preact@7.2.0', {
+    contains: "// The following objects are now available!:\n\n// window.pkgzip['preact']",
+  }))
+  .then(() => testContains('Version expansion redirect', '/bundle.js?packages=skatejs@1.x', {
+    contains: 'location":',
+    checkHeaders: true,
+  }))
+  // testing 'engines' ignore flag since lambda only supports node 4.3
+  .then(() => testContains('Ignoring npm engines field', '/bundle.js?packages=ak-navigation@11.2.3', {
+    contains: 'webpackUniversalModuleDefinition',
+  }))
+  // testing that valid modules don't fail silently
+  .then(() => testContains('Avoids module_not_found', '/bundle.js?packages=ak-navigation@11.2.2', {
+    doesNotContain: 'MODULE_NOT_FOUND',
+  }))
   .then(() => {
     console.log('');
     console.log('✅ All integration tests passed');

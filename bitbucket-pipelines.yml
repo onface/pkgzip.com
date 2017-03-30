@@ -7,16 +7,16 @@ pipelines:
             - node --version
             - npm config set loglevel warn
             - yarn
-            - npm run lint
-            - npm run test
-            - npm run integration-test
-            - npm run deploy
+            - yarn run lint
+            - yarn run test
+            - yarn run integration-test
+            - yarn run deploy
   default:
     - step:
         script:
           - node --version
           - npm config set loglevel warn
           - yarn
-          - npm run lint
-          - npm run test
-          - npm run integration-test
+          - yarn run lint
+          - yarn run test
+          - yarn run integration-test
