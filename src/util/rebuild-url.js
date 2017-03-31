@@ -28,8 +28,12 @@ function rebuildUrl(expandedPackages, buildFlags, env) {
 
   const envPrefix = finalEnv ? `${finalEnv}/` : '';
   const rebuiltPackages = expandedPackages.map(combinePkgNameAndVer).join(',');
-  const flagsParam = selectedFlags.length ? `&flags=${selectedFlags.join(',')}` : '';
-  return `/${envPrefix}bundle.js?packages=${rebuiltPackages}${flagsParam}`;
+  const flagsParam = selectedFlags.length ? `flags=${selectedFlags.join(',')}` : '';
+  const urlParams = [rebuiltPackages, flagsParam].filter(p => !!p).join('&');
+  if (!urlParams) {
+    return `/${envPrefix}`;
+  }
+  return `/${envPrefix}?${urlParams}`;
 }
 
 export default rebuildUrl;
