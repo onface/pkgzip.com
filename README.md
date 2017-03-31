@@ -80,6 +80,4 @@ npm run integration-test
 
 Changes to `master` are automatically tested and deployed to Lambda via [Bitbucket Pipelines](https://bitbucket.org/atlassian/pkgzip/addon/pipelines/home).
 
-AWS Lambda has some environment restrictions (e.g. old version of Node JS), so a Docker image is used to rebuild the app (including node modules) and then deploy to Lambda.
-
 ![Morty](https://i.imgur.com/BQoEXts.png)
