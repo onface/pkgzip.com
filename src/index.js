@@ -9,23 +9,12 @@ import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
 import log from './util/logger';
 
-module.exports.homepage = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    headers: {
-      'content-type': 'text/html; charset=UTF-8',
-    },
-    body: homepage,
-  };
-  callback(null, response);
-};
-
-module.exports.bundle = (event, context, callback) => {
-  function respond(statusCode = 200, message) {
+module.exports.bundler = (event, context, callback) => {
+  function respond(statusCode = 200, message, contentType = 'application/javascript') {
     timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
     const headers = statusCode === 302
       ? { Location: message }
-      : { 'Content-Type': 'application/javascript' };
+      : { 'Content-Type': contentType };
 
     const response = {
       statusCode,
@@ -40,11 +29,16 @@ module.exports.bundle = (event, context, callback) => {
   log(`Running on node ${process.version}`);
 
   const params = Object.assign({
-    packages: '',
     flags: '',
   }, event.queryStringParameters);
 
-  const pkgsParam = params.packages;
+  const pkgsParam = Object.keys(params).find(param => param !== 'flags');
+
+  if (!pkgsParam) {
+    respond(200, homepage, 'text/html; charset=UTF-8');
+    return;
+  }
+
   const requestedPkgs = pkgsParam.split(',').map(parsePkgTag).filter(p => !!p);
 
   if (!requestedPkgs.length) {

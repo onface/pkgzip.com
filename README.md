@@ -5,17 +5,17 @@ Bundles your npm packages via webpack into a single JS file. Runs on AWS Lambda.
 ## Usage
 
 ```html
-<script src="https://pkgzip.com/bundle.js?packages=react,react-dom"></script>
+<script src="https://pkgzip.com/?react,react-dom"></script>
 
 <!--
 semver ranges:
-https://pkgzip.com/bundle.js?packages=left-pad@^1.1.3,right-pad@1.x
+https://pkgzip.com/?left-pad@^1.1.3,right-pad@1.x
 
 minification:
-https://pkgzip.com/bundle.js?packages=left-pad&flags=minify
+https://pkgzip.com/?left-pad&flags=minify
 
 deduping:
-https://pkgzip.com/bundle.js?packages=left-pad,right-pad&flags=dedupe
+https://pkgzip.com/?left-pad,right-pad&flags=dedupe
 -->
 ```
 
@@ -49,7 +49,7 @@ To run a `pkgzip` server locally you can use
 
 ```bash
 npm run offline
-# now go to http://localhost:3000/dev/bundle.js?packages=left-pad
+# now go to http://localhost:3000/dev/?left-pad
 ```
 
 ### Tests

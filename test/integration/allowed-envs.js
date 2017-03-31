@@ -6,20 +6,20 @@ import getEndpoint from '../bin/get-endpoint';
 const expect = chai.expect;
 
 describe('package resolver', () => {
-  it('should show error message if "packages" parameter omitted', (done) => {
-    getEndpoint('/bundle.js')
+  it('should show homepage if no packages passed', (done) => {
+    getEndpoint('/?')
     .then(({ response, body }) => {
-      expect(response.statusCode).to.equal(500);
-      expect(body).to.equal('Please supply at least 1 npm package name in the packages parameter');
+      expect(response.statusCode).to.equal(200);
+      expect(body).to.contain('Your npm packages, webpacked with dependencies.');
       done();
     });
   });
 
   it('should redirect 1.x versions to the correct fixed URL', (done) => {
-    getEndpoint('/bundle.js?packages=skatejs@1.x')
+    getEndpoint('/?skatejs@1.x')
     .then(({ response }) => {
       expect(response.statusCode).to.equal(302);
-      expect(response.headers.location).to.match(/^\/bundle\.js\?packages=skatejs@[0-9]+\.[0-9]+\.[0-9]/);
+      expect(response.headers.location).to.match(/^\/\?skatejs@[0-9]+\.[0-9]+\.[0-9]/);
       done();
     });
   });
@@ -27,7 +27,7 @@ describe('package resolver', () => {
 
 describe('bundling use cases', () => {
   it('should return valid response for unscoped package with fixed version', (done) => {
-    getEndpoint('/bundle.js?packages=left-pad@1.1.3')
+    getEndpoint('/?left-pad@1.1.3')
     .then(({ response, body }) => {
       expect(response.statusCode).to.equal(200);
       expect(body).to.contain('webpackUniversalModuleDefinition');
@@ -37,7 +37,7 @@ describe('bundling use cases', () => {
   });
 
   it('should return valid response for scoped package with fixed version', (done) => {
-    getEndpoint('/bundle.js?packages=@atlaskit/util-shared-styles@1.2.0')
+    getEndpoint('/?@atlaskit/util-shared-styles@1.2.0')
     .then(({ response, body }) => {
       expect(response.statusCode).to.equal(200);
       expect(body).to.contain('webpackUniversalModuleDefinition');
@@ -47,7 +47,7 @@ describe('bundling use cases', () => {
   });
 
   it('should return valid response but include module_not_found for missing peer dep', (done) => {
-    getEndpoint('/bundle.js?packages=@atlaskit/util-shared-styles@1.5.0')
+    getEndpoint('/?@atlaskit/util-shared-styles@1.5.0')
     .then(({ response, body }) => {
       expect(response.statusCode).to.equal(200);
       expect(body).to.contain('webpackUniversalModuleDefinition');
@@ -59,7 +59,7 @@ describe('bundling use cases', () => {
 
 describe('decoration', () => {
   it('should prefix response with usage/exports explanation', (done) => {
-    getEndpoint('/bundle.js?packages=preact@7.2.0')
+    getEndpoint('/?preact@7.2.0')
     .then(({ response, body }) => {
       expect(response.statusCode).to.equal(200);
       expect(body).to.contain("// The following objects are now available!:\n\n// window.pkgzip['preact']");

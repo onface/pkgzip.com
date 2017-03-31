@@ -15,21 +15,13 @@ provider:
       Resource: "*"
 
 functions:
-  homepage:
-    handler: handler.homepage
+  bundler:
+    handler: handler.bundler
     timeout: 60
     memory: 256
     events:
       - http:
           path: /
-          method: get
-  bundle:
-    handler: handler.bundle
-    timeout: 60
-    memory: 256
-    events:
-      - http:
-          path: bundle.js
           method: get
 
 resources:
