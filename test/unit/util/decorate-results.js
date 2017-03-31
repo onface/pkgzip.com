@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
 import chai from 'chai';
-import decorateResults from '../../src/util/decorate-results';
+import decorateResults from '../../../src/util/decorate-results';
 
 const expect = chai.expect;
 

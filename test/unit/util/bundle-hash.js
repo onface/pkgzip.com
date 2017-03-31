@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
 import chai from 'chai';
-import hashBundle from '../../src/util/bundle-hash';
+import hashBundle from '../../../src/util/bundle-hash';
 
 const expect = chai.expect;
 

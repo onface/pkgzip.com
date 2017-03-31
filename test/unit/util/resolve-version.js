@@ -14,7 +14,7 @@ describe('resolveVersion()', () => {
 
     // simulates request of https://registry.npmjs.org/ak-button
     before(() => {
-      resolveVersion = proxyquire('../../src/util/resolve-version', {
+      resolveVersion = proxyquire('../../../src/util/resolve-version', {
         request: {
           get: (opts, callback) => {
             callback(null, '', {
@@ -119,7 +119,7 @@ describe('resolveVersion()', () => {
 
     // simulates request of https://registry.npmjs.org/ak-button
     before(() => {
-      resolveVersion = proxyquire('../../src/util/resolve-version', {
+      resolveVersion = proxyquire('../../../src/util/resolve-version', {
         request: {
           get: (opts, callback) => {
             callback('Not found', null, null);
