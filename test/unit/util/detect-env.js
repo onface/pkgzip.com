@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
 import chai from 'chai';
-import detectEnv from '../../src/util/detect-env';
+import detectEnv from '../../../src/util/detect-env';
 
 const expect = chai.expect;
 

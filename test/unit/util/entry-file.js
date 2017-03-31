@@ -12,7 +12,7 @@ describe('buildEntryFile()', () => {
 
   beforeEach(() => {
     fsWriteSpy = sinon.spy();
-    buildEntryFile = proxyquire('../../src/util/entry-file', {
+    buildEntryFile = proxyquire('../../../src/util/entry-file', {
       fs: { writeFileSync: fsWriteSpy },
     });
   });

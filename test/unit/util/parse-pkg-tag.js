@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
 import chai from 'chai';
-import parsePkgTag from '../../src/util/parse-pkg-tag';
+import parsePkgTag from '../../../src/util/parse-pkg-tag';
 
 const expect = chai.expect;
 

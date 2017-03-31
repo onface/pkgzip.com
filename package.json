@@ -6,12 +6,12 @@
   "scripts": {
     "deploy": "./deploy_to_lambda.sh",
     "dist": "webpack",
-    "integration-test": "npm run dist && FROG_CACHE_DISABLED=1 node ./integration-test.js",
+    "integration-test": "npm run dist && FROG_CACHE_DISABLED=1 node ./test/bin/integration-test.js",
     "lint": "eslint src test",
     "logs": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY serverless logs -f bundle -t",
     "offline": "npm run dist && FROG_CACHE_DISABLED=1 sls offline --prefix dev --noTimeout",
     "sls": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls",
-    "test": "mocha --recursive --compilers js:babel-register",
+    "test": "mocha --recursive --compilers js:babel-register test/unit",
     "test/watch": "npm run test -- -w"
   },
   "keywords": [

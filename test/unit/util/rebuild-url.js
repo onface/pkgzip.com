@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 
 import chai from 'chai';
-import rebuildUrl from '../../src/util/rebuild-url';
+import rebuildUrl from '../../../src/util/rebuild-url';
 
 const expect = chai.expect;
 
