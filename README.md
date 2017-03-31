@@ -9,13 +9,13 @@ Bundles your npm packages via webpack into a single JS file. Runs on AWS Lambda.
 
 <!--
 semver ranges:
-https://pkgzip.com/?left-pad@^1.1.3,right-pad@1.x
+https://pkgzip.com/?react@^15.4.0,left-pad@1.x
 
 minification:
-https://pkgzip.com/?left-pad&flags=minify
+https://pkgzip.com/?react&flags=minify
 
 deduping:
-https://pkgzip.com/?left-pad,right-pad&flags=dedupe
+https://pkgzip.com/?react,left-pad&flags=dedupe
 -->
 ```
 
@@ -49,7 +49,7 @@ To run a `pkgzip` server locally you can use
 
 ```bash
 npm run offline
-# now go to http://localhost:3000/dev/?left-pad
+# now go to http://localhost:3000/dev/?react
 ```
 
 ### Tests
