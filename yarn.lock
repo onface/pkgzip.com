@@ -212,9 +212,9 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-sdk@^2.40.0, aws-sdk@^2.7.13:
-  version "2.40.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.40.0.tgz#7af7410f0484c9ae0742017e217b39917ebbf8d0"
+aws-sdk@^2.41.0, aws-sdk@^2.7.13:
+  version "2.41.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.41.0.tgz#930c15ae7ef4532bb8912c4c36a18b0023fd74c2"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -3317,9 +3317,9 @@ serverless-offline@^3.13.0:
     lodash "^4.17.4"
     velocityjs "^0.9.3"
 
-serverless@^1.10.2:
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.10.2.tgz#48faa173022441300ea7c3d8bc3f205199cd60d6"
+serverless@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.11.0.tgz#bb87e11b334ded5249a93b6827704daa885d280c"
   dependencies:
     archiver "^1.1.0"
     async "^1.5.2"
