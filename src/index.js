@@ -28,6 +28,11 @@ module.exports.bundler = (event, context, callback) => {
 
   log(`Running on node ${process.version}`);
 
+  if (event.path.indexOf('acme-challenge') >= 0) {
+    log('Returning acme-challenge');
+    respond(200, 'FTF0SR7NZxpyl3G8RgPZRS9AEW4bh6QeRatMMUNBXJA.7eu-EA4FaZIm7bXVEEqhX9OEIpVR3ZyiqdyAXawNqWE', 'text/plain');
+  }
+
   const params = Object.assign({
     flags: '',
   }, event.queryStringParameters);
