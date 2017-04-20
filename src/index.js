@@ -1,4 +1,5 @@
 import deepEqual from 'lodash.isequal';
+import 'isomorphic-fetch';
 import homepage from 'raw-loader!./assets/index.html'; // eslint-disable-line
 import bundleFn from './modules/bundle';
 import expandVersions from './util/expand-versions';
@@ -8,6 +9,31 @@ import parsePkgTag from './util/parse-pkg-tag';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
 import log from './util/logger';
+
+module.exports.letsencrypt = (event, context, callback) => {
+  function respond(statusCode = 200, message, contentType = 'application/javascript') {
+    timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
+    const headers = statusCode === 302
+      ? { Location: message }
+      : { 'Content-Type': contentType };
+
+    const response = {
+      statusCode,
+      headers,
+      body: message,
+    };
+    callback(null, response);
+  }
+
+  log('Returning acme-challenge');
+  // eslint-disable-next-line
+  fetch('https://s3-ap-southeast-2.amazonaws.com/pkgzip-letsencrypt-nonce/challenge.txt')
+    .then(result => result.text())
+    .then((challengeNonce) => {
+      log(`Nonce: ${challengeNonce}`);
+      respond(200, challengeNonce, 'text/plain');
+    });
+};
 
 module.exports.bundler = (event, context, callback) => {
   function respond(statusCode = 200, message, contentType = 'application/javascript') {
@@ -27,11 +53,6 @@ module.exports.bundler = (event, context, callback) => {
   timeStart(TIMER_BUNDLE_REQUEST_DURATION);
 
   log(`Running on node ${process.version}`);
-
-  if (event.path.indexOf('acme-challenge') >= 0) {
-    log('Returning acme-challenge');
-    respond(200, 'FTF0SR7NZxpyl3G8RgPZRS9AEW4bh6QeRatMMUNBXJA.7eu-EA4FaZIm7bXVEEqhX9OEIpVR3ZyiqdyAXawNqWE', 'text/plain');
-  }
 
   const params = Object.assign({
     flags: '',

@@ -23,6 +23,14 @@ functions:
       - http:
           path: /
           method: get
+  letsencrypt:
+    handler: handler.letsencrypt
+    timeout: 10
+    memory: 256
+    events:
+      - http:
+          path: /.well-known/acme-challenge/{random+}
+          method: get
 
 resources:
   Resources:
