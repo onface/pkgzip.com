@@ -80,4 +80,19 @@ npm run integration-test
 
 Changes to `master` are automatically tested and deployed to Lambda via [Bitbucket Pipelines](https://bitbucket.org/atlassian/pkgzip/addon/pipelines/home).
 
+### SSL Certificate
+
+The production domain uses an SSL certificate provided by Let's Encrypt.
+
+To provision use the following steps (similar to [this blog post](http://blog.brianz.bz/post/custom-https-domains-with-serverless/)):
+
+1.  In a new local folder run `certbot certonly -a manual --config-dir . --logs-dir . --work-dir .`
+2.  Upload the blob shown to `pkgzip-letsencrypt-nonce/challenge.txt` on S3
+3.  Repeat if challenge fails (usually due to timeout/expiry)
+4.  Upload cert to AWS Certificate Manager, noting the generated ARN (must be `us-east-1` region)
+5.  Delete local certificate files
+6.  Go to API Gateway > Custom Domain Names
+7.  Delete pkgzip.com custom domain name
+8.  Create new pkgzip.com custom domain name (domain pkgzip.com, choose certificate, path = `/`, set up path mapping)
+
 ![Morty](https://i.imgur.com/BQoEXts.png)
