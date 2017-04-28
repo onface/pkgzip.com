@@ -32,11 +32,14 @@ function doYarn(buildDir) {
       timeStart(TIMER_YARN_INSTALL_TOTAL);
       childProc.exec(`${yarnBin} --ignore-engines --prod --cache-folder ${os.tmpdir()}`, {
         cwd: buildDir,
-      }, (err) => {
+      }, (err, stdout, stderr) => {
       // childProc.exec(`${yarnBin} --ignore-engines`, { cwd: buildDir }, (err) => {
         timeEnd(TIMER_YARN_INSTALL_TOTAL);
         if (err) {
           throw new Error(err);
+        }
+        if (stdout || stderr) {
+          log(stdout || stderr);
         }
         resolve({ buildDir });
       });
