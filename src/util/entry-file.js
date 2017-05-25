@@ -1,6 +1,13 @@
+// @flow
+
 import fs from 'fs';
 
-function buildEntryFile({ entryFilePath, allPkgNames = [] }) {
+type EntryObjectType = {
+  entryFilePath: string,
+  allPkgNames: Array<string>,
+}
+
+function buildEntryFile({ entryFilePath, allPkgNames = [] } : EntryObjectType) {
   const requireLines = allPkgNames.map(pkg => `\nwindow.pkgzip['${pkg}'] = require('${pkg}');`).join('');
   const entryFileContents = `window.pkgzip = {}; ${requireLines}`;
   fs.writeFileSync(entryFilePath, entryFileContents);
@@ -9,4 +16,5 @@ function buildEntryFile({ entryFilePath, allPkgNames = [] }) {
 // required for proxyquire
 module.exports = buildEntryFile;
 
+// $FlowFixMe
 export default buildEntryFile;

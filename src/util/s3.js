@@ -1,3 +1,5 @@
+// @flow
+
 import AWS from 'aws-sdk';
 import { TIMER_S3_UPLOAD, TIMER_S3_DOWNLOAD, timeStart, timeEnd } from './timer-keys';
 import log from './logger';
@@ -12,7 +14,7 @@ function newS3() {
   });
 }
 
-function upload(filename, contents) {
+function upload(filename: string, contents: string): Promise<any> {
   timeStart(TIMER_S3_UPLOAD);
   return new Promise((resolve) => {
     newS3().putObject({
@@ -32,7 +34,7 @@ function upload(filename, contents) {
   });
 }
 
-function download(filename) {
+function download(filename: string) {
   timeStart(TIMER_S3_DOWNLOAD);
   return new Promise((resolve, reject) => {
     newS3().getObject({

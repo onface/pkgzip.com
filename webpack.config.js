@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
@@ -11,10 +10,13 @@ module.exports = {
     library: 'morty',
   },
   module: {
-    preLoaders: [
-      { test: /\.json$/, exclude: /node_modules/, loader: 'json' },
-    ],
-    loaders: [
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.json$/,
+        exclude: /node_modules/,
+        loader: 'json',
+      },
       {
         loader: 'babel-loader',
         test: /\.js$/,
@@ -25,7 +27,4 @@ module.exports = {
   },
   target: 'node',
   externals: ['aws-sdk', nodeExternals()],
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-  ],
 };

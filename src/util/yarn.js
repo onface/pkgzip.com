@@ -1,3 +1,5 @@
+// @flow
+
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
@@ -5,6 +7,7 @@ import childProc from 'child_process';
 import tmpDir from './tmp-dir';
 import { TIMER_YARN_INSTALL_TOTAL, timeStart, timeEnd } from './timer-keys';
 import log from './logger';
+import type { PackagesType } from '../types/PackageType';
 
 // create a package.json in the supplied dir
 function createPkgJsonFile(packages, buildDir) {
@@ -50,16 +53,13 @@ function doYarn(buildDir) {
 }
 
 // entry fn
-function yarnInstall(packages) {
-  return new Promise((resolve, reject) => {
-    tmpDir().then(createPkgJsonFile.bind(null, packages)).then(doYarn).then((pkgJsonResults) => {
+function yarnInstall(packages: PackagesType) {
+  return tmpDir().then(createPkgJsonFile.bind(null, packages))
+    .then(doYarn)
+    .then((pkgJsonResults) => {
       const { buildDir } = pkgJsonResults;
-      return resolve({ buildDir });
-    })
-    .catch((e) => {
-      reject(e);
+      return { buildDir };
     });
-  });
 }
 
 export default yarnInstall;
