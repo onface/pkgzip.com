@@ -8,6 +8,7 @@ pipelines:
             - npm config set loglevel warn
             - yarn
             - yarn run lint
+            - yarn run flow
             - yarn run test
             - yarn run integration-test
             - yarn run deploy
@@ -18,5 +19,6 @@ pipelines:
           - npm config set loglevel warn
           - yarn
           - yarn run lint
+          - yarn run flow
           - yarn run test
           - yarn run integration-test
