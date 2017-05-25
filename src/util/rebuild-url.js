@@ -1,10 +1,14 @@
+// @flow
+
 import { isEnvAllowed } from './allowed-envs';
+import type { PackagesType, PackageType } from '../types/PackageType';
+import type { FlagsType } from '../types/Flags';
 
 function testAlwaysTrueIf(alwaysTrueIf, buildFlags) {
   return alwaysTrueIf && alwaysTrueIf.some(flg => !!buildFlags[flg]);
 }
 
-function combinePkgNameAndVer(pkg) {
+function combinePkgNameAndVer(pkg: PackageType): string {
   const { pkgName, pkgVersion } = pkg;
   if (pkgVersion && pkgVersion !== 'latest') {
     return `${pkgName}@${pkgVersion}`;
@@ -12,11 +16,11 @@ function combinePkgNameAndVer(pkg) {
   return pkgName;
 }
 
-function rebuildUrl(expandedPackages, buildFlags, env) {
+function rebuildUrl(expandedPackages: PackagesType, buildFlags: FlagsType, env: string) {
   const finalEnv = isEnvAllowed(env) ? env : false;
   const selectedFlags = [];
   const allowedFlags = [
-    { flag: 'dedupe' },
+    { flag: 'dedupe', alwaysTrueIf: [] },
     { flag: 'minify', alwaysTrueIf: ['dedupe'] },
   ];
   allowedFlags.forEach((flagSet) => {

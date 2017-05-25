@@ -6,8 +6,12 @@ pipelines:
           script:
             - node --version
             - npm config set loglevel warn
+            # apt-get needed for flow
+            - apt-get update
+            - apt-get -y install ocaml libelf-dev
             - yarn
             - yarn run lint
+            - yarn run flow
             - yarn run test
             - yarn run integration-test
             - yarn run deploy
@@ -16,7 +20,11 @@ pipelines:
         script:
           - node --version
           - npm config set loglevel warn
+          # apt-get needed for flow
+          - apt-get update
+          - apt-get -y install ocaml libelf-dev
           - yarn
           - yarn run lint
+          - yarn run flow
           - yarn run test
           - yarn run integration-test

@@ -1,5 +1,8 @@
+// @flow
+
 import deepEqual from 'lodash.isequal';
 import 'isomorphic-fetch';
+// $FlowFixMe
 import homepage from 'raw-loader!./assets/index.html'; // eslint-disable-line
 import bundleFn from './modules/bundle';
 import expandVersions from './util/expand-versions';
@@ -9,8 +12,13 @@ import parsePkgTag from './util/parse-pkg-tag';
 import { ERR_EXPANSION_NEEDS_REDIRECT } from './util/errors';
 import { TIMER_BUNDLE_REQUEST_DURATION, timeStart, timeEnd } from './util/timer-keys';
 import log from './util/logger';
+import type { LambdaEventType, LambdaContextType, LambdaCallbackType } from './types/Lambda';
 
-module.exports.letsencrypt = (event, context, callback) => {
+module.exports.letsencrypt = (
+  event: LambdaEventType,
+  context: LambdaContextType,
+  callback: LambdaCallbackType,
+) => {
   function respond(statusCode = 200, message, contentType = 'application/javascript') {
     timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
     const headers = statusCode === 302
@@ -35,7 +43,11 @@ module.exports.letsencrypt = (event, context, callback) => {
     });
 };
 
-module.exports.bundler = (event, context, callback) => {
+module.exports.bundler = (
+  event: LambdaEventType,
+  context: LambdaContextType,
+  callback: LambdaCallbackType,
+) => {
   function respond(statusCode = 200, message, contentType = 'application/javascript') {
     timeEnd(TIMER_BUNDLE_REQUEST_DURATION);
     const headers = statusCode === 302

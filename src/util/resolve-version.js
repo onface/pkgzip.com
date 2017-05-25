@@ -1,6 +1,9 @@
+// @flow
+
 import request from 'request';
 import semver from 'semver';
 import log from './logger';
+import type { PackageType } from '../types/PackageType';
 
 function getVersions(pkgName) {
   return new Promise((resolve) => {
@@ -18,18 +21,20 @@ function getVersions(pkgName) {
   });
 }
 
-function resolveVersion(pkgName, pkgRange) {
+function resolveVersion(pkgName: string, pkgRange: string): Promise<PackageType> {
   return getVersions(pkgName).then((pkgVersions) => {
     const newestMatch = pkgVersions.find(pkgVer => (
       !pkgRange || pkgRange === 'latest' || semver.satisfies(pkgVer, pkgRange)
     ));
+
     return {
       pkgName,
-      pkgVersion: newestMatch,
+      pkgVersion: newestMatch || '',
     };
   });
 }
 
 module.exports = resolveVersion;
 
+// $FlowFixMe
 export default resolveVersion;

@@ -1,8 +1,14 @@
+// @flow
+
 import webpack from 'webpack';
+import type { FlagsType } from '../types/Flags';
 
-export default function (opts) {
-  const { buildDir, buildFlags } = opts;
+type WebpackBuildOptsType = {
+  buildDir: string,
+  buildFlags: FlagsType
+}
 
+export default function ({ buildDir, buildFlags }: WebpackBuildOptsType) {
   const selectedPlugins = [
     new webpack.DefinePlugin({
       'process.env': {
@@ -17,12 +23,6 @@ export default function (opts) {
     }));
   }
 
-  if (buildFlags.dedupe) {
-    selectedPlugins.push(new webpack.optimize.DedupePlugin({
-      include: 'bundle.js',
-    }));
-  }
-
   const compiler = webpack({
     context: buildDir,
     entry: './entry.js',
@@ -32,7 +32,7 @@ export default function (opts) {
       libraryTarget: 'umd',
     },
     resolve: {
-      root: `${buildDir}/node_modules`,
+      modules: [`${buildDir}/node_modules`],
     },
     plugins: selectedPlugins,
   });

@@ -1,4 +1,9 @@
-function parsePkgTag(pkgDef) {
+// @flow
+
+import type { PackageType } from '../types/PackageType';
+
+// $FlowFixMe
+function parsePkgTag(pkgDef: string): ?PackageType {
   const parts = pkgDef.split('@');
   if (pkgDef.indexOf('@') === 0) {
     const [, pkgName, pkgVersion] = parts;

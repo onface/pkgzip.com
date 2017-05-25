@@ -1,3 +1,5 @@
+// @flow
+
 import fs from 'fs';
 import yarnInstall from '../util/yarn';
 import bundleHash from '../util/bundle-hash';
@@ -6,10 +8,13 @@ import log from '../util/logger';
 import { upload, download } from '../util/s3';
 import buildEntryFile from '../util/entry-file';
 import decorateResults from '../util/decorate-results';
-
 import webpackGen from '../util/webpack';
+import type { FlagsType } from '../types/Flags';
+import type { PackagesType } from '../types/PackageType';
 
-const Bundle = (buildFlags = {}, requestedPkgs = []) => (
+const defaultFlags: FlagsType = { minify: false, dedupe: false };
+
+const Bundle = (buildFlags: FlagsType = defaultFlags, requestedPkgs: PackagesType = []) => (
   new Promise((resolve, reject) => {
     const hash = bundleHash(requestedPkgs, buildFlags);
     const cdnFilename = `${hash}.js`;

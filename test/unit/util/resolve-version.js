@@ -128,10 +128,10 @@ describe('resolveVersion()', () => {
       });
     });
 
-    it('should resolve promise with empty version for unknown component', () => (
+    it('should resolve promise with empty version string for unknown component', () => (
       expect(resolveVersion('ak-doesnt-exist', '0.x')).to.eventually.deep.equal({
         pkgName: 'ak-doesnt-exist',
-        pkgVersion: undefined,
+        pkgVersion: '',
       })
     ));
   });

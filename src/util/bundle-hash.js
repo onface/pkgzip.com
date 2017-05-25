@@ -1,6 +1,12 @@
-import sha256 from 'js-sha256';
+// @flow
 
-function hashBundle(requestedPkgs = [], flags = {}) {
+import sha256 from 'js-sha256';
+import type { PackagesType } from '../types/PackageType';
+import type { FlagsType } from '../types/Flags';
+
+const defaultFlags: FlagsType = { minify: false, dedupe: false };
+
+function hashBundle(requestedPkgs: PackagesType = [], flags: FlagsType = defaultFlags) {
   // build obj of known flags
   const presentValues = {};
   ['minify', 'dedupe'].forEach((flag) => {
@@ -9,7 +15,7 @@ function hashBundle(requestedPkgs = [], flags = {}) {
   });
 
   // Override default vals with supplied flags
-  const buildFlags = Object.assign({ minify: false, dedupe: false }, presentValues);
+  const buildFlags: FlagsType = Object.assign({ minify: false, dedupe: false }, presentValues);
 
   return sha256(JSON.stringify({
     packages: requestedPkgs.map((pkg) => {
