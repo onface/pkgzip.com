@@ -86,13 +86,17 @@ The production domain uses an SSL certificate provided by Let's Encrypt.
 
 To provision use the following steps (similar to [this blog post](http://blog.brianz.bz/post/custom-https-domains-with-serverless/)):
 
-1.  In a new local folder run `certbot certonly -a manual --config-dir . --logs-dir . --work-dir .`
-2.  Upload the blob shown to `pkgzip-letsencrypt-nonce/challenge.txt` on S3
-3.  Repeat if challenge fails (usually due to timeout/expiry)
-4.  Upload cert to AWS Certificate Manager, noting the generated ARN (must be `us-east-1` region)
-5.  Delete local certificate files
-6.  Go to API Gateway > Custom Domain Names
-7.  Delete pkgzip.com custom domain name
-8.  Create new pkgzip.com custom domain name (domain pkgzip.com, choose certificate, path = `/`, set up path mapping)
+0.  Log in to http://go.atlassian.com/aws
+0.  Select `design-platform-team`
+0.  Navigation to S3 and prepare to upload a new verison of `pkgzip-letsencrypt-nonce/challenge.txt`
+0.  In a new local folder run `certbot certonly -a manual --config-dir . --logs-dir . --work-dir .`
+0.  Upload the blob shown to `pkgzip-letsencrypt-nonce/challenge.txt` on S3 (set read access form everyone)
+0.  Repeat if challenge fails (usually due to timeout/expiry)
+0.  Upload cert to AWS Certificate Manager, noting the generated ARN (must be `us-east-1` region)
+0.  Set uploaded certificate name tag to `pkgzip-letsencrypt-YYYYMMDD`
+0.  Delete local certificate files
+0.  Go to API Gateway > Custom Domain Names (Sydney ap-southeast-2 region)
+0.  Delete pkgzip.com custom domain name
+0.  Create new pkgzip.com custom domain name (domain pkgzip.com, choose certificate, path = `/`, set up path mapping to dev-morty)
 
 ![Morty](https://i.imgur.com/BQoEXts.png)
