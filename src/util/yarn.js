@@ -46,7 +46,7 @@ function doYarn(buildDir) {
         resolve({ buildDir });
       });
     } catch (e) {
-      log('Yarn error', e);
+      log(`Yarn error ${e}`);
       reject(e);
     }
   });
