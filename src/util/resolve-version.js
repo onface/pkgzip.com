@@ -12,7 +12,7 @@ function getVersions(pkgName) {
       json: true,
     }, (err, resp, body) => {
       if (err || (body && !('versions' in body))) {
-        log(`Error retrieving versions for ${pkgName}`, err);
+        log(`Error retrieving versions for ${pkgName} ${err}`);
         resolve([]);
         return;
       }

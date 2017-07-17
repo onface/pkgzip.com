@@ -43,11 +43,11 @@ function download(filename: string) {
     }, (err, data) => {
       timeEnd(TIMER_S3_DOWNLOAD);
       if (err || process.env.FROG_CACHE_DISABLED) {
-        log(`No cache found for '${filename}'`, err);
+        log(`No cache found for '${filename}' ${err}`);
         reject(err);
         return;
       }
-      log(`Downloaded cached '${filename}' from S3`, filename, err);
+      log(`Downloaded cached '${filename}' from S3. ${filename} ${err}`);
       resolve(data.Body.toString('utf-8'));
     });
   });
