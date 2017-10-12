@@ -7,7 +7,10 @@ const expect = chai.expect;
 
 describe('decorateResults()', () => {
   it('should prepend output with comment indicating package names', () => {
-    expect(decorateResults(['my-pkg'], '// webpack code')).to.equal(`// The following objects are now available!:
+    expect(decorateResults(['my-pkg'], '// webpack code')).to.equal(`
+console.warn("END OF LIFE NOTICE: PKGZIP SERVICE IS DEPRECATED AND WILL STOP WORKING ON JANUARY 1 2018. THANK YOU FOR USING PKGZIP, BUT WE ARE SWITCHING IT OFF AS THERE ARE MUCH BETTER TOOLS OUT THERE NOW, SUCH AS THE AWESOME CODESANDBOX.IO");
+
+// The following objects are now available!:
 
 // window.pkgzip['my-pkg']
 
@@ -16,7 +19,10 @@ describe('decorateResults()', () => {
   });
 
   it('should support multiple packages including scope', () => {
-    expect(decorateResults(['my-pkg', '@atlassian/my-button'], '// webpack code')).to.equal(`// The following objects are now available!:
+    expect(decorateResults(['my-pkg', '@atlassian/my-button'], '// webpack code')).to.equal(`
+console.warn("END OF LIFE NOTICE: PKGZIP SERVICE IS DEPRECATED AND WILL STOP WORKING ON JANUARY 1 2018. THANK YOU FOR USING PKGZIP, BUT WE ARE SWITCHING IT OFF AS THERE ARE MUCH BETTER TOOLS OUT THERE NOW, SUCH AS THE AWESOME CODESANDBOX.IO");
+
+// The following objects are now available!:
 
 // window.pkgzip['my-pkg']
 // window.pkgzip['@atlassian/my-button']

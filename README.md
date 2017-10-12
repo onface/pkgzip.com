@@ -97,6 +97,6 @@ To provision use the following steps (similar to [this blog post](http://blog.br
 0.  Delete local certificate files
 0.  Go to API Gateway > Custom Domain Names (Sydney ap-southeast-2 region)
 0.  Delete pkgzip.com custom domain name
-0.  Create new pkgzip.com custom domain name (domain pkgzip.com, choose certificate, path = `/`, set up path mapping to dev-morty)
+0.  Create new pkgzip.com custom domain name (domain pkgzip.com, choose certificate, path = `/`, set up path mapping to dev-morty:dev)
 
 ![Morty](https://i.imgur.com/BQoEXts.png)
