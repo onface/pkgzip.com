@@ -1,4 +1,4 @@
-service: morty
+service: pkgzip
 
 provider:
   name: aws

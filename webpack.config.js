@@ -7,7 +7,7 @@ module.exports = {
     path: __dirname,
     filename: 'handler.js',
     libraryTarget: 'umd',
-    library: 'morty',
+    library: 'pkgzip',
   },
   module: {
     rules: [

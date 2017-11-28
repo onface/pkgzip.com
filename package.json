@@ -1,5 +1,6 @@
 {
-  "name": "@atlassian/morty",
+  "name": "@atlassian/pkgzip",
+  "private": true,
   "version": "0.0.25",
   "description": "Bundles your npm packages via webpack into a single JS file",
   "main": "dist/index.js",
@@ -26,15 +27,12 @@
     "README.md",
     "public"
   ],
-  "publishConfig": {
-    "registry": "https://npm-private.atlassian.io"
-  },
   "pre-commit": [
     "lint",
     "test"
   ],
   "author": "Atlassian",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "aws-sdk": "^2.85.0",
     "isomorphic-fetch": "^2.2.1",

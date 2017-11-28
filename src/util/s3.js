@@ -5,7 +5,7 @@ import { TIMER_S3_UPLOAD, TIMER_S3_DOWNLOAD, timeStart, timeEnd } from './timer-
 import log from './logger';
 
 // bucket/region hard coded due to cloudformation not exposing generated name
-const S3_BUCKET = 'morty-dev-jscache-1ri289wdsoxmd';
+const S3_BUCKET = 'pkgzip-dev-jscache-1ri289wdsoxmd';
 const S3_REGION = 'ap-southeast-2';
 
 function newS3() {
