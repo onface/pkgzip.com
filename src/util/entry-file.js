@@ -9,7 +9,7 @@ type EntryObjectType = {
 
 function buildEntryFile({ entryFilePath, allPkgNames = [] } : EntryObjectType) {
   const requireLines = allPkgNames.map(pkg => `\nwindow.pkgzip['${pkg}'] = require('${pkg}');`).join('');
-  const entryFileContents = `window.pkgzip = {}; ${requireLines}`;
+  const entryFileContents = `if (typeof window !== 'undefined') { window.pkgzip = window.pkgzip || {}; ${requireLines} }`;
   fs.writeFileSync(entryFilePath, entryFileContents);
 }
 

@@ -10,7 +10,7 @@ function decorateResults(allPkgNames: Array<string>, resultsBlob: string) {
   const helpText = allPkgNames.map(pkg => `\n// window.pkgzip['${pkg}']`).join('');
 
   return resultsBlob && `
-console.warn(${JSON.stringify(deprecationMsg)});
+  // console.warn(${JSON.stringify(deprecationMsg)});
 
 // The following objects are now available!:
 ${helpText}
