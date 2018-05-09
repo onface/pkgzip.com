@@ -12,6 +12,7 @@
     "lint": "eslint src test",
     "logs": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY serverless logs -f bundler -t",
     "offline": "npm run dist && FROG_CACHE_DISABLED=1 sls offline --noTimeout",
+    "s": "npm run dist && sls offline",
     "sls": "AWS_ACCESS_KEY_ID=$FROG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$FROG_AWS_SECRET_ACCESS_KEY sls",
     "test": "mocha --recursive --compilers js:babel-register test/unit",
     "test/watch": "npm run test -- -w"
