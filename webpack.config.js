@@ -26,5 +26,5 @@ module.exports = {
     ],
   },
   target: 'node',
-  externals: ['aws-sdk', nodeExternals()],
+  externals: [nodeExternals()],
 };
