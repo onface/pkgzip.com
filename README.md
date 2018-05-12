@@ -9,17 +9,17 @@ Bundles your npm packages via webpack into a single JS file. Runs on AWS Lambda.
 ## Usage
 
 ```html
-<script src="https://pkgzip.com/?react,react-dom"></script>
+<script src="https://webpack.onface.live/?react,react-dom"></script>
 
 <!--
 semver ranges:
-https://pkgzip.com/?react@^15.4.0,left-pad@1.x
+https://webpack.onface.live/?react@^15.4.0,left-pad@1.x
 
 minification:
-https://pkgzip.com/?react&flags=minify
+https://webpack.onface.live/?react&flags=minify
 
 deduping:
-https://pkgzip.com/?react,left-pad&flags=dedupe
+https://webpack.onface.live/?react,left-pad&flags=dedupe
 -->
 ```
 

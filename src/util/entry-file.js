@@ -8,8 +8,8 @@ type EntryObjectType = {
 }
 
 function buildEntryFile({ entryFilePath, allPkgNames = [] } : EntryObjectType) {
-  const requireLines = allPkgNames.map(pkg => `\nwindow.pkgzip['${pkg}'] = require('${pkg}');`).join('');
-  const entryFileContents = `if (typeof window !== 'undefined') { window.pkgzip = window.pkgzip || {}; ${requireLines} }`;
+  const requireLines = allPkgNames.map(pkg => `\nwindow.onface['${pkg}'] = require('${pkg}');`).join('');
+  const entryFileContents = `if (typeof window !== 'undefined') { window.onface = window.onface || {}; ${requireLines} }`;
   fs.writeFileSync(entryFilePath, entryFileContents);
 }
 

@@ -16,6 +16,6 @@ describe('detectEnv()', () => {
     expect(detectEnv('//production/blah')).to.equal('');
     expect(detectEnv('production')).to.equal('');
     expect(detectEnv('')).to.equal('');
-    expect(detectEnv('https://pkgzip.com/dev/blah')).to.equal('');
+    expect(detectEnv('https://webpack.onface.live/dev/blah')).to.equal('');
   });
 });

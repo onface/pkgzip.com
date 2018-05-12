@@ -5,7 +5,7 @@ import yarnInstall from '../util/yarn';
 import bundleHash from '../util/bundle-hash';
 import { TIMER_WEBPACK_EXECUTION, timeStart, timeEnd } from '../util/timer-keys';
 import log from '../util/logger';
-import { upload, download } from '../util/s3';
+import { upload, download } from '../util/local';
 import buildEntryFile from '../util/entry-file';
 import decorateResults from '../util/decorate-results';
 import webpackGen from '../util/webpack';

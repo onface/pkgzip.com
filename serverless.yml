@@ -39,7 +39,7 @@ resources:
     pathmapping:
       Type: AWS::ApiGateway::BasePathMapping
       Properties:
-        DomainName: pkgzip.com
+        DomainName: webpack.onface.live
         RestApiId:
           Ref: ApiGatewayRestApi
         Stage: dev
