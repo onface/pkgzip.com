@@ -19,24 +19,25 @@ module.exports = {
     },
     download: function (filename) {
         return new Promise(function (resolve, reject) {
-            fs.exists(filename, function (exists) {
-                if (!exists) {
-                    reject()
-                }
-                else {
-                    fs.readFile(
-                        path.join(__dirname, '../../_cache/', filename),
-                        function (err, content) {
-                            if (err) {
-                                reject(err.message)
-                            }
-                            else {
-                                resolve(content.toString())
-                            }
-                        }
-                    )
-                }
-            })
+            reject()
+            // fs.exists(filename, function (exists) {
+            //     if (!exists) {
+            //         reject()
+            //     }
+            //     else {
+            //         fs.readFile(
+            //             path.join(__dirname, '../../_cache/', filename),
+            //             function (err, content) {
+            //                 if (err) {
+            //                     reject(err.message)
+            //                 }
+            //                 else {
+            //                     resolve(content.toString())
+            //                 }
+            //             }
+            //         )
+            //     }
+            // })
         })
     }
 }
