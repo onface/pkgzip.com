@@ -11,7 +11,7 @@ module.exports = {
     download: function (filename) {
         return new Promise(function (resolve, reject) {
             if (typeof cache[filename] === 'undefined') {
-                resolve()
+                reject()
             }
             else {
                 resolve(cache[filename])
